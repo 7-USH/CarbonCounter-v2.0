@@ -21,21 +21,21 @@ class Utils {
   static List<Tiles> getTiles() {
     return [
       Tiles(
-          color: Colors.amber,
-          emission: 10,
-          sentence: "Total Emission",
-          icon: Icons.cloud,
-          ),
+        color: Colors.amber,
+        emission: 10,
+        sentence: "Total Emission",
+        icon: Icons.cloud,
+      ),
       Tiles(
-        color: Colors.orange, 
-        emission: 45, sentence: 
-        "Transport", 
-        icon: Icons.place_outlined),
+          color: Colors.orange,
+          emission: 45,
+          sentence: "Transport",
+          icon: Icons.place_outlined),
       Tiles(
           color: Colors.red,
           emission: 80,
           sentence: "Meals",
-          icon: Icons.food_bank), 
+          icon: Icons.food_bank),
     ];
   }
 }

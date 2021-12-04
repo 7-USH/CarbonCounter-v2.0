@@ -3,7 +3,7 @@ import 'package:carbon_footprint/widgets/navigate_button.dart';
 import 'package:flutter/material.dart';
 
 class MyButtomNavigationBar extends StatefulWidget {
-  MyButtomNavigationBar({Key? key}) : super(key: key);
+  const MyButtomNavigationBar({Key? key}) : super(key: key);
 
   @override
   _MyButtomNavigationBarState createState() => _MyButtomNavigationBarState();
@@ -21,15 +21,15 @@ class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(bottom: 15, top: 10),
+      padding: const EdgeInsets.only(bottom: 15, top: 10),
       height: MediaQuery.of(context).size.height / 10,
       width: double.infinity,
       decoration: BoxDecoration(
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [kPrimeColor, kGreenOne]),
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(50),
             topRight: Radius.circular(50),
           ),
@@ -49,29 +49,23 @@ class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           NavigateButton(
-            nextPage: (){
-              
+            nextPage: () {
               //TODO: navigate button 1
-
             },
             iconData: Icons.home,
             tag: 1,
             selectedIndex: _selectedIndex,
           ),
           NavigateButton(
-            nextPage: (){
-
-
-                //TODO: navigate button 2
-
+            nextPage: () {
+              //TODO: navigate button 2
             },
             iconData: Icons.markunread,
             tag: 2,
             selectedIndex: _selectedIndex,
           ),
           NavigateButton(
-            nextPage: (){
-
+            nextPage: () {
               //TODO: navigate button 3
             },
             iconData: Icons.person,

@@ -2,7 +2,7 @@ import 'package:carbon_footprint/constants/themes.dart';
 import 'package:carbon_footprint/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -13,9 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: appTheme,
       initialRoute: HomeScreen.id,
-      routes: {
-        HomeScreen.id : (context) => HomeScreen()
-      },
+      routes: {HomeScreen.id: (context) => const HomeScreen()},
     );
   }
 }

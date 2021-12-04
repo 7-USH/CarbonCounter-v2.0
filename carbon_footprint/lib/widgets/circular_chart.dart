@@ -53,7 +53,7 @@ class MiddleRing extends StatelessWidget {
     return Container(
       height: width,
       width: width,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         shape: BoxShape.circle,
       ),
@@ -61,8 +61,9 @@ class MiddleRing extends StatelessWidget {
         child: Container(
           height: width * 0.3,
           width: width * 0.3,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             shape: BoxShape.circle,
+            // ignore: prefer_const_literals_to_create_immutables
             boxShadow: [
               // Edge shadow
               BoxShadow(
@@ -105,14 +106,14 @@ class CircularChart extends StatefulWidget {
 }
 
 class _CircularChartState extends State<CircularChart> {
-
   @override
   Widget build(BuildContext context) {
     final int number = widget.calculationNumber.toInt();
     return Container(
       width: widget.height,
       height: widget.height,
-      decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+      decoration:
+          const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
       child: Stack(alignment: AlignmentDirectional.center, children: [
         MiddleRing(
           width: widget.height * 1.5,
@@ -122,7 +123,7 @@ class _CircularChartState extends State<CircularChart> {
           width: widget.width + 80,
           child: CustomPaint(
             child: Container(
-                decoration: BoxDecoration(shape: BoxShape.circle),
+                decoration: const BoxDecoration(shape: BoxShape.circle),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
