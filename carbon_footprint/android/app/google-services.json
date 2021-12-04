@@ -1,0 +1,113 @@
+{
+  "project_info": {
+    "project_number": "280337481450",
+    "project_id": "carbon-footprint-c2321",
+    "storage_bucket": "carbon-footprint-c2321.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:280337481450:android:f03ad8487b10fd12c16193",
+        "android_client_info": {
+          "package_name": "com.example.carbon_counter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "280337481450-879qvvo26j0rc25ndp07ucr1tivtn9rj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.carbon_counter",
+            "certificate_hash": "9221baa2bb8128ce1ee2e0df0baef3f35a74672a"
+          }
+        },
+        {
+          "client_id": "280337481450-2edkbhldqta0522vggajdddcnutfe0qi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM2W2lnxbglt2vuXayejHWUrYicjmRLbs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "280337481450-2edkbhldqta0522vggajdddcnutfe0qi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:280337481450:android:ff06d71291489047c16193",
+        "android_client_info": {
+          "package_name": "com.example.carbon_footprint"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "280337481450-vfqlac9us4b2b2b0ul72jmnkvhlofht7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.carbon_footprint",
+            "certificate_hash": "9221baa2bb8128ce1ee2e0df0baef3f35a74672a"
+          }
+        },
+        {
+          "client_id": "280337481450-2edkbhldqta0522vggajdddcnutfe0qi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM2W2lnxbglt2vuXayejHWUrYicjmRLbs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "280337481450-2edkbhldqta0522vggajdddcnutfe0qi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:280337481450:android:4f006adf176a4067c16193",
+        "android_client_info": {
+          "package_name": "com.example.readpact01"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "280337481450-2edkbhldqta0522vggajdddcnutfe0qi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM2W2lnxbglt2vuXayejHWUrYicjmRLbs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "280337481450-2edkbhldqta0522vggajdddcnutfe0qi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

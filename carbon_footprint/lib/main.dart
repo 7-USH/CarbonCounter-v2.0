@@ -1,19 +1,35 @@
 import 'package:carbon_footprint/constants/themes.dart';
 import 'package:carbon_footprint/screens/home_screen.dart';
+import 'package:carbon_footprint/screens/login_screen.dart';
+import 'package:carbon_footprint/screens/provider/google_sign_in.dart';
+import 'package:carbon_footprint/screens/provider/google_validate.dart.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: appTheme,
-      initialRoute: HomeScreen.id,
-      routes: {HomeScreen.id: (context) => const HomeScreen()},
+    return ChangeNotifierProvider(
+      create: (context) => GoogleSignInProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: appTheme,
+        initialRoute: LoginPage.id,
+        routes: {
+          HomeScreen.id: (context) => const HomeScreen(),
+          LoginPage.id: (context) => const LoginPage(),
+          UserPage.id: (context) => const UserPage(),
+        },
+      ),
     );
   }
 }

@@ -5,6 +5,7 @@ import 'package:carbon_footprint/models/tiles.dart';
 import 'package:carbon_footprint/widgets/bottom_navigation.dart';
 import 'package:carbon_footprint/widgets/circular_chart.dart';
 import 'package:carbon_footprint/widgets/info_tiles.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -20,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
     final size = MediaQuery.of(context).size;
     final now = DateTime.now();
 
@@ -35,12 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
               width: size.width,
               child: Row(
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 40,
                     backgroundColor: kPrimeColor,
                     child: CircleAvatar(
                       radius: 35,
-                      backgroundImage: AssetImage("assets/images/2sh.jpg"),
+                      backgroundImage: NetworkImage(user.photoURL!),
                     ),
                   ),
                   const SizedBox(
@@ -54,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: Theme.of(context).textTheme.bodyText1,
                       ),
                       Text(
-                        "Hello, Tushar",
+                        "Hello, ${user.displayName}",
                         style: Theme.of(context).textTheme.headline3,
                       ),
                     ],

@@ -15,6 +15,11 @@ ThemeData appTheme = ThemeData(
     headline2: GoogleFonts.ptSerif(
         color: kTextColor, fontSize: 40, fontWeight: FontWeight.bold),
     headline3: GoogleFonts.lobster(color: kTextColor, fontSize: 34),
+    headline6: GoogleFonts.ptSerif(
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+      fontSize: 45,
+    ),
     bodyText1: GoogleFonts.ptSerif(
         color: kTextColor.withOpacity(0.8),
         fontSize: 15,
