@@ -1,5 +1,4 @@
 // ignore_for_file: avoid_unnecessary_containers, sized_box_for_whitespace, non_constant_identifier_names, avoid_types_as_parameter_names
-
 import 'package:carbon_footprint/constants/themes.dart';
 import 'package:carbon_footprint/models/tiles.dart';
 import 'package:carbon_footprint/widgets/bottom_navigation.dart';
@@ -28,52 +27,54 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
           child: Column(
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 22),
-                color: Colors.transparent,
-                height: size.height / 7,
-                width: size.width,
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 40,
-                      backgroundColor: kPrimeColor,
-                      child: CircleAvatar(
-                        radius: 35,
-                        backgroundImage: AssetImage(
-                          "assets/2sh.jpg"
-                        )
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          DateFormat.yMMMd().format(now),
-                          style: Theme.of(context).textTheme.bodyText1,
+              Flexible(
+                fit: FlexFit.loose,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 22),
+                  height: size.height / 7,
+                  width: size.width,
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundColor: kPrimeColor,
+                        child: CircleAvatar(
+                          radius: 35,
+                          backgroundImage: AssetImage(
+                            "assets/2sh.jpg"
+                          )
                         ),
-                        Text(
-                          "Hello, Tushar",
-                          style: Theme.of(context).textTheme.headline3,
-                        )
-                      ],
-                    ),
-                    Spacer(),
-                    IconButton(
-                        onPressed: () {
-                          // TODO: homepage menu/ drawer
-                        },
-                        icon: Icon(Icons.menu, color: kTextColor))
-                  ],
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            DateFormat.yMMMd().format(now),
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                          Text(
+                            "Hello, Tushar",
+                            style: Theme.of(context).textTheme.headline3,
+                          )
+                        ],
+                      ),
+                      Spacer(),
+                      IconButton(
+                          onPressed: () {
+                            // TODO: homepage menu/ drawer
+                          },
+                          icon: Icon(Icons.menu, color: kTextColor))
+                    ],
+                  ),
                 ),
               ),
               CircularChart(
                 // TODO: here enter the Calculated Number
                 // and percentage of Co2 Emission as of today
-
+          
                 calculationNumber: 10,
                 width: size.width / 3,
                 height: size.height / 3,
