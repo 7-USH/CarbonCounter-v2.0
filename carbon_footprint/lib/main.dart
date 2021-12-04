@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: appTheme,
-        initialRoute: LoginPage.id,
+        initialRoute: UserPage.id,
         routes: {
           HomeScreen.id: (context) => const HomeScreen(),
           LoginPage.id: (context) => const LoginPage(),
