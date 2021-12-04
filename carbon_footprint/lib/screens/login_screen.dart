@@ -1,9 +1,10 @@
-import 'package:carbon_footprint/constants/themes.dart';
-import 'package:carbon_footprint/screens/provider/google_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
+import 'package:carbon_footprint/constants/themes.dart';
+import 'package:carbon_footprint/screens/provider/google_sign_in.dart';
 
 class LoginPage extends StatefulWidget {
   static String id = "LoginScreen";
