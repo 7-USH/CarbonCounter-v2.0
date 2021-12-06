@@ -3,6 +3,8 @@
 import 'package:carbon_footprint/constants/themes.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:flutter/material.dart';
+import 'package:velocity_x/src/flutter/shimmer.dart';
 
 class ProgressPainter extends CustomPainter {
   //
@@ -120,6 +122,9 @@ class _CircularChartState extends State<CircularChart> {
                     Text(
                       "CO₂",
                       style: Theme.of(context).textTheme.headline1,
+                    ).shimmer(
+                      primaryColor: kPrimeColor,
+                      secondaryColor: kPrimeColor.withOpacity(0.8)
                     ),
                     Text(
                       "$number Kg",

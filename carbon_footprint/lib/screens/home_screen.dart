@@ -22,16 +22,16 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    // final user = FirebaseAuth.instance.currentUser!;
+    final user = FirebaseAuth.instance.currentUser!;
     final size = MediaQuery.of(context).size;
     final now = DateTime.now();
-
+    String name = user.displayName!;
     return Scaffold(
       bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
+          decoration: const BoxDecoration(
               gradient:
                   LinearGradient(colors: [kPrimeColor, kGreenOne, kGreenTwo])),
-        child: const MyButtomNavigationBar()),
+          child: const MyButtomNavigationBar()),
       body: Container(
         decoration: const BoxDecoration(
             gradient:
@@ -40,7 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 22),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 22),
                 color: Colors.transparent,
                 height: size.height / 7,
                 width: size.width,
@@ -48,12 +49,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     // ignore: prefer_const_constructors
                     CircleAvatar(
-                      radius: 40,
+                      radius: 44,
                       backgroundColor: kPrimeColor,
                       // ignore: prefer_const_constructors
                       child: CircleAvatar(
                         radius: 35,
-                        backgroundImage: AssetImage("assets/images/2sh.jpg"),
+                        backgroundImage: NetworkImage(user.photoURL!),
                       ),
                     ),
                     const SizedBox(
@@ -67,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           style: Theme.of(context).textTheme.bodyText1,
                         ),
                         Text(
-                          "Hello,Tushar", // ${user.displayName}
+                          "Hello, "+name.split(" ")[0].toString(),
                           style: Theme.of(context).textTheme.headline3,
                         ),
                       ],
@@ -85,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
               CircularChart(
                 // TODO: here enter the Calculated Number
                 // and percentage of Co2 Emission as of today
-      
+
                 calculationNumber: 100,
                 width: size.width / 3,
                 height: size.height / 3,
