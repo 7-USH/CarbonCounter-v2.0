@@ -19,7 +19,26 @@ class _EmissionPageState extends State<EmissionPage> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [kPrimeColor, kGreenOne,kGreenTwo])),
+          gradient: LinearGradient(
+            colors: [kPrimeColor, kGreenOne, kGreenTwo],
+          ),
+        ),
+        child: Center(
+          child: SizedBox(
+            height: 50,
+            width: 150,
+            child: ElevatedButton(
+              child: Text(
+                "LOGOUT",
+              ),
+              onPressed: () {
+                final provider =
+                    Provider.of<GoogleSignInProvider>(context, listen: false);
+                provider.logout();
+              },
+            ),
+          ),
+        ),
       ),
     );
   }
