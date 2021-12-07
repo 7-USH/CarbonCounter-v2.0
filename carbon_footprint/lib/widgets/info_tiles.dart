@@ -30,15 +30,15 @@ class InfoTiles extends StatelessWidget {
         borderRadius: BorderRadius.circular(25),
         boxShadow: [
           BoxShadow(
-              color: Colors.black.withOpacity(0.19),
-              offset: const Offset(0.5, 8),
+              color: Colors.black.withOpacity(0.5),
+              offset: const Offset(1,4),
               spreadRadius: 1,
               blurRadius: 8),
-          BoxShadow(
-              color: Colors.white.withOpacity(0.4),
-              offset: const Offset(-3, -7),
-              spreadRadius: -2,
-              blurRadius: 20),
+          // BoxShadow(
+          //     color: Colors.white.withOpacity(0.4),
+          //     offset: const Offset(-1, -10),
+          //     spreadRadius: -2,
+          //     blurRadius: 20),
         ],
       ),
       child: Row(

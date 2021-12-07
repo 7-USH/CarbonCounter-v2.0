@@ -1,7 +1,10 @@
 // ignore_for_file: avoid_renaming_method_parameters, must_be_immutable, sized_box_for_whitespace
 
+import 'package:carbon_footprint/constants/themes.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:flutter/material.dart';
+import 'package:velocity_x/src/flutter/shimmer.dart';
 
 class ProgressPainter extends CustomPainter {
   //
@@ -54,7 +57,7 @@ class MiddleRing extends StatelessWidget {
       height: width,
       width: width,
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: Colors.transparent,
         shape: BoxShape.circle,
       ),
       child: Center(
@@ -62,25 +65,9 @@ class MiddleRing extends StatelessWidget {
           height: width * 0.3,
           width: width * 0.3,
           decoration: const BoxDecoration(
+            color: Colors.transparent,
             shape: BoxShape.circle,
             // ignore: prefer_const_literals_to_create_immutables
-            boxShadow: [
-              // Edge shadow
-              BoxShadow(
-                offset: Offset(-1.5, -1.5),
-                color: Colors.black12,
-                spreadRadius: 2.0,
-                // blurRadius: 0,
-              ),
-
-              // Circular shadow
-              BoxShadow(
-                offset: Offset(1.5, 1.5),
-                color: Colors.white,
-                spreadRadius: 2.0,
-                blurRadius: 4,
-              )
-            ],
           ),
         ),
       ),
@@ -113,7 +100,10 @@ class _CircularChartState extends State<CircularChart> {
       width: widget.height,
       height: widget.height,
       decoration:
-          const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+          const BoxDecoration(
+            color: Colors.transparent, shape: BoxShape.circle,
+
+            ),
       child: Stack(alignment: AlignmentDirectional.center, children: [
         MiddleRing(
           width: widget.height * 1.5,
@@ -123,13 +113,18 @@ class _CircularChartState extends State<CircularChart> {
           width: widget.width + 80,
           child: CustomPaint(
             child: Container(
-                decoration: const BoxDecoration(shape: BoxShape.circle),
+                decoration: const BoxDecoration(
+                  color: Colors.transparent,
+                  shape: BoxShape.circle),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "CO₂",
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.headline1,
+                    ).shimmer(
+                      primaryColor: kPrimeColor,
+                      secondaryColor: kPrimeColor.withOpacity(0.8)
                     ),
                     Text(
                       "$number Kg",

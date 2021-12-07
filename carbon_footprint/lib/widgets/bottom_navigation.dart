@@ -36,14 +36,14 @@ class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
           boxShadow: [
             BoxShadow(
                 color: Colors.black.withOpacity(0.19),
-                offset: const Offset(3, -8),
+                offset: const Offset(1, -2),
                 spreadRadius: 1,
                 blurRadius: 8),
-            BoxShadow(
-                color: Colors.white.withOpacity(0.4),
-                offset: const Offset(1, -7),
-                spreadRadius: -2,
-                blurRadius: 20),
+            // BoxShadow(
+            //     color: Colors.white.withOpacity(0.4),
+            //     offset: const Offset(1, -7),
+            //     spreadRadius: -2,
+            //     blurRadius: 20),
           ]),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
