@@ -15,7 +15,6 @@ import 'package:velocity_x/velocity_x.dart';
 class HomeScreen extends StatefulWidget {
   static String id = "HomeScreen";
   const HomeScreen({Key? key}) : super(key: key);
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -91,8 +90,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Theme.of(context).textTheme.headline3
                                             ),                           
                                   ])).shimmer(
-                                    primaryColor: kPrimeColor,
-                                    secondaryColor: kPrimeColor.withOpacity(0.8)
+                                    primaryColor: kTextColor,
+                                    secondaryColor: kPrimeColor.withOpacity(0.6)
                                   ),
                             ),
                           )
@@ -132,6 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: size.height / 5,
                   width: double.infinity,
                   child: ListView.builder(
+                      physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemCount: Utils.getTiles().length,
                       itemBuilder: (BuildContext, index) {

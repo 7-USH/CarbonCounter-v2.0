@@ -54,6 +54,10 @@ class Utils {
   static List<EmissionTiles> getEmissionTiles() {
     return [
       EmissionTiles(color: Colors.red, icon: Icons.ac_unit, mode: "Car"),
+      EmissionTiles(color: Colors.yellow, icon: Icons.bus_alert, mode: "Bus"),
+      EmissionTiles(color: Colors.blue, icon: Icons.food_bank_outlined, mode: "Meals"),
+      EmissionTiles(color: Colors.orange, icon: Icons.place, mode: "Plane"),
+      EmissionTiles(color: Colors.green, icon: Icons.air, mode: "Auto"),
     ];
   }
 }
