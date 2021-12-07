@@ -39,10 +39,10 @@ class Utils {
         icon: Icons.cloud,
       ),
       Tiles(
-          color: Colors.orange,
-          emission: 45,
-          sentence: "Transport",
-          icon: Icons.place_outlined),
+        color: Colors.cyan, 
+        emission: 45, sentence: 
+        "Transport", 
+        icon: Icons.airplanemode_on),
       Tiles(
           color: Colors.red,
           emission: 80,
