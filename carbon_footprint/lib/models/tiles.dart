@@ -17,6 +17,18 @@ class Tiles {
   });
 }
 
+class EmissionTiles {
+  String mode;
+  Color color;
+  IconData icon;
+
+  EmissionTiles({
+    required this.color,
+    required this.icon,
+    required this.mode,
+  });
+}
+
 class Utils {
   static List<Tiles> getTiles() {
     return [
@@ -36,6 +48,12 @@ class Utils {
           emission: 80,
           sentence: "Meals",
           icon: Icons.food_bank),
+    ];
+  }
+
+  static List<EmissionTiles> getEmissionTiles() {
+    return [
+      EmissionTiles(color: Colors.red, icon: Icons.ac_unit, mode: "Car"),
     ];
   }
 }
