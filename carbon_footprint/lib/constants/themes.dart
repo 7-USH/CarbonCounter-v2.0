@@ -38,7 +38,7 @@ ThemeData appTheme = ThemeData(
         fontSize: 30,
         fontWeight: FontWeight.bold),
     headline5: GoogleFonts.ptSerif(
-        color: kTextColor, fontSize: 25, fontWeight: FontWeight.bold),    
+        color: kTextColor, fontSize: 25, fontWeight: FontWeight.bold),
     button: GoogleFonts.notoSans(
       color: Colors.white,
       fontSize: 20,
