@@ -14,12 +14,8 @@ ThemeData appTheme = ThemeData(
         color: kTextColor, fontSize: 50, fontWeight: FontWeight.w300),
     headline2: GoogleFonts.ptSerif(
         color: kTextColor, fontSize: 40, fontWeight: FontWeight.bold),
-    headline3: GoogleFonts.lobster(color: kTextColor, fontSize: 34),
-    headline6: GoogleFonts.ptSerif(
-      color: Colors.white,
-      fontWeight: FontWeight.bold,
-      fontSize: 45,
-    ),
+    headline3: GoogleFonts.lobster(color: Colors.white, fontSize: 34),
+    headline6: GoogleFonts.lobster(color: kTextColor, fontSize: 28),
     bodyText1: GoogleFonts.ptSerif(
         color: kTextColor.withOpacity(0.8),
         fontSize: 15,
@@ -42,7 +38,7 @@ ThemeData appTheme = ThemeData(
         fontSize: 30,
         fontWeight: FontWeight.bold),
     headline5: GoogleFonts.ptSerif(
-        color: kTextColor, fontSize: 25, fontWeight: FontWeight.bold),    
+        color: kTextColor, fontSize: 25, fontWeight: FontWeight.bold),
     button: GoogleFonts.notoSans(
       color: Colors.white,
       fontSize: 20,
