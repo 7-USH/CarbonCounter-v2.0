@@ -1,5 +1,4 @@
 // ignore_for_file: avoid_unnecessary_containers, sized_box_for_whitespace, non_constant_identifier_names, avoid_types_as_parameter_names
-
 import 'package:carbon_footprint/constants/themes.dart';
 import 'package:carbon_footprint/models/tiles.dart';
 import 'package:carbon_footprint/widgets/bottom_navigation.dart';
@@ -28,87 +27,88 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       bottomNavigationBar: const MyButtomNavigationBar(),
       body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 22),
-              color: Colors.transparent,
-              height: size.height / 7,
-              width: size.width,
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    radius: 40,
-                    backgroundColor: kPrimeColor,
-                    child: CircleAvatar(
-                      radius: 35,
-                      backgroundImage: NetworkImage(user.photoURL!),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
+            children: [
+              Flexible(
+                fit: FlexFit.loose,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 22),
+                  height: size.height / 7,
+                  width: size.width,
+                  child: Row(
                     children: [
-                      Text(
-                        DateFormat.yMMMd().format(now),
-                        style: Theme.of(context).textTheme.bodyText1,
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundColor: kPrimeColor,
+                        child: CircleAvatar(
+                          radius: 35,
+                          backgroundImage: AssetImage(
+                            "assets/2sh.jpg"
+                          )
+                        ),
                       ),
-                      Text(
-                        "Hello, ${user.displayName}",
-                        style: Theme.of(context).textTheme.headline3,
+                      SizedBox(
+                        width: 20,
                       ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            DateFormat.yMMMd().format(now),
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                          Text(
+                            "Hello, Tushar",
+                            style: Theme.of(context).textTheme.headline3,
+                          )
+                        ],
+                      ),
+                      Spacer(),
+                      IconButton(
+                          onPressed: () {
+                            // TODO: homepage menu/ drawer
+                          },
+                          icon: Icon(Icons.menu, color: kTextColor))
                     ],
                   ),
-                  const Spacer(),
-                  IconButton(
-                    onPressed: () {
-                      // TODO: homepage menu/ drawer
-                    },
-                    icon: const Icon(Icons.menu, color: kTextColor),
-                  ),
-                ],
+                ),
               ),
-            ),
-            CircularChart(
-              // TODO: here enter the Calculated Number
-              // and percentage of Co2 Emission as of today
-
-              calculationNumber: 10,
-              width: size.width / 3,
-              height: size.height / 3,
-              painter: ProgressPainter(
-                  circleWidth: size.width / 10,
-                  completedPercentage: 60,
-                  defaultCircleColor: kPrimeColor,
-                  percentageCompletedCircleColor: kGreenTwo),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              "So far this month",
-              style: Theme.of(context).textTheme.bodyText2,
-            ),
-            Container(
-              height: size.height / 5,
-              width: double.infinity,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: Utils.getTiles().length,
-                  itemBuilder: (BuildContext, index) {
-                    return InfoTiles(
-                        color: Utils.getTiles()[index].color,
-                        icon: Utils.getTiles()[index].icon,
-                        text: Utils.getTiles()[index].sentence,
-                        percent: Utils.getTiles()[index].emission);
-                  }),
-            ),
-            myCustomButton(context)
-          ],
-        ),
-      ),
+              CircularChart(
+                // TODO: here enter the Calculated Number
+                // and percentage of Co2 Emission as of today
+          
+                calculationNumber: 10,
+                width: size.width / 3,
+                height: size.height / 3,
+                painter: ProgressPainter(
+                    circleWidth: size.width / 10,
+                    completedPercentage: 60,
+                    defaultCircleColor: kPrimeColor,
+                    percentageCompletedCircleColor: kGreenTwo),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "So far this month",
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+              Container(
+                  height: size.height / 5,
+                  width: double.infinity,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: Utils.getTiles().length,
+                      itemBuilder: (BuildContext, index) {
+                        return InfoTiles(
+                            color: Utils.getTiles()[index].color,
+                            icon: Utils.getTiles()[index].icon,
+                            text: Utils.getTiles()[index].sentence,
+                            percent: Utils.getTiles()[index].emission);
+                      })),
+              myCustomButton(context)
+            ],
+          )),
     );
   }
 }
