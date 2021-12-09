@@ -6,6 +6,7 @@ import 'package:carbon_footprint/screens/journery.dart';
 import 'package:carbon_footprint/screens/login_screen.dart';
 import 'package:carbon_footprint/screens/provider/google_sign_in.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -129,7 +130,7 @@ class _EmissionPageState extends State<EmissionPage> {
   }
 }
 
-class EmissionBottomBar extends StatelessWidget {
+class EmissionBottomBar extends StatefulWidget {
   const EmissionBottomBar({
     Key? key,
     required this.size,
@@ -138,33 +139,61 @@ class EmissionBottomBar extends StatelessWidget {
   final Size size;
 
   @override
+  State<EmissionBottomBar> createState() => _EmissionBottomBarState();
+}
+
+class _EmissionBottomBarState extends State<EmissionBottomBar> {
+  LocationPermission? permission;
+  Future<void> _askPermission() async {
+    bool serviceEnabled;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      permission = await Geolocator.requestPermission();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
         clipBehavior: Clip.antiAliasWithSaveLayer,
         padding: const EdgeInsets.only(bottom: 15, top: 10),
-        height: size.height / 10,
+        height: widget.size.height / 10,
         width: double.infinity,
         decoration: BoxDecoration(
-            gradient: const LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [kPrimeColor, kGreenOne]),
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(50),
-              topRight: Radius.circular(50),
-            ),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.black.withOpacity(0.19),
-                  offset: const Offset(1, -2),
-                  spreadRadius: 1,
-                  blurRadius: 8),
-            ]),
+          gradient: const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [kPrimeColor, kGreenOne]),
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(50),
+            topRight: Radius.circular(50),
+          ),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.19),
+                offset: const Offset(1, -2),
+                spreadRadius: 1,
+                blurRadius: 8),
+          ],
+        ),
         child: Center(
           child: GestureDetector(
-            onTap: () {
-              // TODO: next Page Map
-              Navigator.pushNamed(context, JourneyCounter.id);
+            onTap: () async {
+              _askPermission();
+              if (permission == LocationPermission.whileInUse ||
+                  permission == LocationPermission.always) {
+                Navigator.pushNamed(context, JourneyCounter.id);
+              }
             },
             onTapDown: (details) => {},
             child: Container(

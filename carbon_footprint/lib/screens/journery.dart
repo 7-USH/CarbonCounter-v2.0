@@ -20,36 +20,8 @@ class _JourneyCounterState extends State<JourneyCounter> {
   double distance = 0;
   Position? prevLocation;
 
-  Future<void> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      } else if (permission != LocationPermission.deniedForever) {
-        setState(() {});
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-
-    _currentLocation = await Geolocator.getCurrentPosition();
-  }
-
   @override
   void initState() {
-    _determinePosition();
     super.initState();
   }
 
@@ -167,8 +139,10 @@ class _JourneyCounterState extends State<JourneyCounter> {
                               ),
                               child: GoogleMap(
                                 initialCameraPosition: CameraPosition(
-                                  target: LatLng(_currentLocation!.latitude,
-                                      _currentLocation!.longitude),
+                                  target: LatLng(
+                                    (snapshot.data as Position).latitude,
+                                    (snapshot.data as Position).longitude,
+                                  ),
                                   zoom: 15,
                                 ),
                                 mapType: MapType.normal,
