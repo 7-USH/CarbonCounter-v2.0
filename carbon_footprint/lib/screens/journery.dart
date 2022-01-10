@@ -159,7 +159,7 @@ class _JourneyCounterState extends State<JourneyCounter> {
                                           "https://cdn-icons-png.flaticon.com/512/1196/1196775.png"),
                                     ),
                                   ),
-                                  Text("Distance: " + distance.toString())
+                                  Text("Distance: " + (distance/1000).toStringAsFixed(2))
                                 ],
                               ),
                               Column(
