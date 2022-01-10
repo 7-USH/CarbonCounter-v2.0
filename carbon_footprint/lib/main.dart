@@ -1,6 +1,6 @@
 import 'package:carbon_footprint/constants/themes.dart';
 import 'package:carbon_footprint/screens/home_screen.dart';
-import 'package:carbon_footprint/screens/journery.dart';
+import 'package:carbon_footprint/screens/journey.dart';
 import 'package:carbon_footprint/screens/login_screen.dart';
 import 'package:carbon_footprint/screens/provider/google_sign_in.dart';
 import 'package:carbon_footprint/screens/provider/google_validate.dart.dart';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           HomeScreen.id: (context) => const HomeScreen(),
           LoginPage.id: (context) => const LoginPage(),
           UserPage.id: (context) => const UserPage(),
-          JourneyCounter.id : (context) => JourneyCounter(),
+          JourneyCounter.id: (context) => const JourneyCounter(),
         },
       ),
     );
