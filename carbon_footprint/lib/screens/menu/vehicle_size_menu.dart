@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_constructors_in_immutables
 
 import 'package:carbon_footprint/constants/themes.dart';
 import 'package:carousel_slider/carousel_slider.dart';
