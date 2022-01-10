@@ -85,7 +85,12 @@ class _CarDetailsState extends State<CarDetails> {
         GestureDetector(
           onTap: () async {
             var type = Navigator.pushNamed(context, VehicleFuelMenu.id);
+            var prevType = fuelType;
             fuelType = (await type).toString();
+            if (fuelType == "null") {
+              fuelType = prevType;
+            }
+            print(fuelType);
             setState(() {});
           },
           child: Container(

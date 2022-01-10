@@ -145,7 +145,7 @@ class CheckBoxModel {
     ),
     CheckBoxModel(
       image:
-          "https://cdn-icons.flaticon.com/png/512/465/premium/465039.png?token=exp=1641833152~hmac=b44496ef557afe6f0973653e2c48c6c8",
+          "https://cdn-icons.flaticon.com/png/512/3219/premium/3219521.png?token=exp=1641834214~hmac=e4ca1e4a1a8fae6ad73fe91ac548fb11",
       title: "CNG",
     ),
     CheckBoxModel(
