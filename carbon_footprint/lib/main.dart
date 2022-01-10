@@ -1,4 +1,6 @@
 import 'package:carbon_footprint/constants/themes.dart';
+import 'package:carbon_footprint/models/Indicator.dart';
+import 'package:carbon_footprint/screens/LoadingScreen.dart';
 import 'package:carbon_footprint/screens/home_screen.dart';
 import 'package:carbon_footprint/screens/journery.dart';
 import 'package:carbon_footprint/screens/login_screen.dart';
@@ -14,7 +16,6 @@ void main() async {
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
-
 
 
 class MyApp extends StatelessWidget {
@@ -34,12 +35,14 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: appTheme,
-        initialRoute: UserPage.id,
+        initialRoute: LoadingScreen.id,
         routes: {
           HomeScreen.id: (context) => const HomeScreen(),
           LoginPage.id: (context) => const LoginPage(),
           UserPage.id: (context) => const UserPage(),
           JourneyCounter.id : (context) => JourneyCounter(),
+          LoadingScreen.id : (context) => LoadingScreen(nextPage: const UserPage(),),
+          Indicator.id : (context) => Indicator(),
         },
       ),
     );
