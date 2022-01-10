@@ -1,9 +1,12 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, avoid_unnecessary_containers, prefer_const_constructors_in_immutables, must_be_immutable
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, avoid_unnecessary_containers, prefer_const_constructors_in_immutables, must_be_immutable, unnecessary_this, avoid_print, use_key_in_widget_constructors, unused_import
 
 import 'package:carbon_footprint/constants/themes.dart';
+import 'package:carbon_footprint/models/BusDetails.dart';
+import 'package:carbon_footprint/models/CarDetails.dart';
 import 'package:carbon_footprint/models/tiles.dart';
 import 'package:carbon_footprint/screens/journery.dart';
 import 'package:carbon_footprint/screens/login_screen.dart';
+import 'package:carbon_footprint/screens/provider/data.dart';
 import 'package:carbon_footprint/screens/provider/google_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -19,6 +22,16 @@ class EmissionPage extends StatefulWidget {
 
 class _EmissionPageState extends State<EmissionPage> {
   bool _onCreatePage = false;
+  int selectedIndex = 0;
+
+  List widgetList = [
+    CarDetails(),
+    BusDetails(),
+    CarDetails(),
+    BusDetails(),
+    CarDetails(),
+    CarDetails(),
+  ];
 
   @override
   void initState() {
@@ -105,7 +118,29 @@ class _EmissionPageState extends State<EmissionPage> {
                           SizedBox(
                             height: 20,
                           ),
-                          TransportList(),
+                          Container(
+                            height: 150,
+                            child: ListView.builder(
+                              physics: BouncingScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: Utils.getEmissionTiles().length,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                    onTap: () {
+                                      selectedIndex = index;
+                                      setState(() {
+                                        Provider.of<DataPage>(context,
+                                                listen: false)
+                                            .getIndex(index);
+                                      });
+                                    },
+                                    child: ModeTiles(
+                                      index: index,
+                                      selectedIndex: selectedIndex,
+                                    ));
+                              },
+                            ),
+                          ),
                           SizedBox(
                             height: 20,
                           ),
@@ -117,7 +152,7 @@ class _EmissionPageState extends State<EmissionPage> {
                           SizedBox(
                             height: 20,
                           ),
-                          Details()
+                          widgetList[selectedIndex],
                         ],
                       ),
                     ),
@@ -215,40 +250,14 @@ class _EmissionBottomBarState extends State<EmissionBottomBar> {
   }
 }
 
-class TransportList extends StatefulWidget {
-  TransportList({Key? key}) : super(key: key);
 
-  @override
-  _TransportListState createState() => _TransportListState();
-}
-
-class _TransportListState extends State<TransportList> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 150,
-      child: ListView.builder(
-        physics: BouncingScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        itemCount: Utils.getEmissionTiles().length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-              onTap: () {
-                print(index);
-                //TODO: clickable blocks for each different index
-              },
-              child: ModeTiles(
-                index: index,
-              ));
-        },
-      ),
-    );
-  }
-}
 
 class ModeTiles extends StatelessWidget {
+  int selectedIndex;
+
   ModeTiles({
     required this.index,
+    required this.selectedIndex,
     Key? key,
   }) : super(key: key);
   int index;
@@ -279,6 +288,7 @@ class ModeTiles extends StatelessWidget {
           child: Center(
             child: Icon(
               Utils.getEmissionTiles()[index].icon,
+              color: index == selectedIndex ? Colors.white : Colors.black,
               size: 60,
             ),
           ),
@@ -289,102 +299,6 @@ class ModeTiles extends StatelessWidget {
   }
 }
 
-class Details extends StatelessWidget {
-  const Details({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        child: Flex(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      direction: Axis.vertical,
-      children: [
-        InkWell(
-          splashColor: Colors.grey,
-          onTap: () {
-            //  TODO: size page
-          },
-          child: Container(
-            color: Colors.white24,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withOpacity(0.19),
-                              offset: const Offset(1, 4),
-                              spreadRadius: 1,
-                              blurRadius: 8),
-                          BoxShadow(
-                              color: Colors.white.withOpacity(0.4),
-                              offset: const Offset(-3, -4),
-                              spreadRadius: -2,
-                              blurRadius: 20),
-                        ]),
-                    child: Icon(
-                      Icons.pedal_bike,
-                      size: 40,
-                    )),
-                Text(
-                  "Vehicle Size",
-                  style: Theme.of(context).textTheme.bodyText2,
-                ),
-                Icon(Icons.arrow_forward_ios)
-              ],
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 40,
-        ),
-        GestureDetector(
-          onTap: () {
-            //  TODO fuel page
-          },
-          child: Container(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withOpacity(0.19),
-                              offset: const Offset(1, 4),
-                              spreadRadius: 1,
-                              blurRadius: 8),
-                          BoxShadow(
-                              color: Colors.white.withOpacity(0.4),
-                              offset: const Offset(-3, -4),
-                              spreadRadius: -2,
-                              blurRadius: 20),
-                        ]),
-                    child: Icon(
-                      Icons.bike_scooter,
-                      size: 40,
-                    )),
-                Text(
-                  "Fuel Type",
-                  style: Theme.of(context).textTheme.bodyText2,
-                ),
-                Icon(Icons.arrow_forward_ios)
-              ],
-            ),
-          ),
-        )
-      ],
-    ));
-  }
-}
+
+

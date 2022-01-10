@@ -40,9 +40,14 @@ class _VehicleSizeMenuState extends State<VehicleSizeMenu> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            leading: Icon(
-              Icons.arrow_back_ios_new,
-              color: kTextColor,
+            leading: IconButton(
+              onPressed: (){
+                Navigator.pop(context, optionList["title"]![activeIndex]);
+              },
+              icon: Icon(
+                Icons.arrow_back_ios_new,
+                color: kTextColor,
+              ),
             ),
             elevation: 0,
             title: Text(
@@ -131,7 +136,7 @@ class _VehicleSizeMenuState extends State<VehicleSizeMenu> {
                                   border: Border.all(
                                     color: kPrimeColor,
                                     width: (activeIndex == index) ? 10 : 0,
-                                  ),
+                                  ),                                     
                                 ),
                                 child: Container(
                                   clipBehavior: Clip.antiAlias,
@@ -166,6 +171,8 @@ class _VehicleSizeMenuState extends State<VehicleSizeMenu> {
                               await Future.delayed(Duration(milliseconds: 200));
                               confirmed = false;
                               setState(() {});
+                              Navigator.pop(
+                                  context, optionList["title"]![activeIndex]);
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -176,8 +183,10 @@ class _VehicleSizeMenuState extends State<VehicleSizeMenu> {
                                     offset: Offset(1, confirmed ? 4 : 8),
                                     blurRadius: 8,
                                   ),
+                                  
                                 ],
-                                borderRadius: BorderRadius.circular(25),
+                                
+                               borderRadius: BorderRadius.circular(25),
                               ),
                               height: 45,
                               child: Padding(
