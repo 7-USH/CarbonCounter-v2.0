@@ -12,16 +12,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'screens/menu/vehicle_fuel_menu.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
- 
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
           create: (_) => GoogleSignInProvider(),
         ),
         ChangeNotifierProvider<DataPage>(
-          create:(_)=>DataPage(),
+          create: (_) => DataPage(),
         )
       ],
       child: MaterialApp(
@@ -41,10 +42,13 @@ class MyApp extends StatelessWidget {
           HomeScreen.id: (context) => const HomeScreen(),
           LoginPage.id: (context) => const LoginPage(),
           UserPage.id: (context) => const UserPage(),
-          JourneyCounter.id : (context) => const JourneyCounter(),
-          LoadingScreen.id : (context) => LoadingScreen(nextPage: const UserPage(),),
-          Indicator.id : (context) => Indicator(),
-          VehicleSizeMenu.id : (context) =>VehicleSizeMenu(),
+          JourneyCounter.id: (context) => JourneyCounter(),
+          LoadingScreen.id: (context) => LoadingScreen(
+                nextPage: const UserPage(),
+              ),
+          Indicator.id: (context) => Indicator(),
+          VehicleSizeMenu.id: (context) => VehicleSizeMenu(),
+          VehicleFuelMenu.id: (context) => VehicleFuelMenu(),
         },
       ),
     );

@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors
 
-
+import 'package:carbon_footprint/screens/menu/vehicle_fuel_menu.dart';
 import 'package:carbon_footprint/screens/menu/vehicle_size_menu.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +15,7 @@ class CarDetails extends StatefulWidget {
 
 class _CarDetailsState extends State<CarDetails> {
   late String carType;
+  late String fuelType;
 
   Object? name;
 
@@ -22,6 +23,7 @@ class _CarDetailsState extends State<CarDetails> {
   void initState() {
     super.initState();
     carType = name == null ? "Vehicle Size" : name as String;
+    fuelType = name == null ? "Fuel Type" : name as String;
   }
 
   @override
@@ -34,7 +36,8 @@ class _CarDetailsState extends State<CarDetails> {
         InkWell(
           splashColor: Colors.grey,
           onTap: () async {
-            name = await Navigator.pushNamed(context, VehicleSizeMenu.id);
+            name = Navigator.pushNamed(context, VehicleSizeMenu.id);
+            name = await name;
             setState(() {
               carType = name as String;
             });
@@ -80,7 +83,15 @@ class _CarDetailsState extends State<CarDetails> {
           height: 40,
         ),
         GestureDetector(
-          onTap: () {
+          onTap: () async {
+            var type = Navigator.pushNamed(context, VehicleFuelMenu.id);
+            var prevType = fuelType;
+            fuelType = (await type).toString();
+            if (fuelType == "null") {
+              fuelType = prevType;
+            }
+            print(fuelType);
+            setState(() {});
           },
           child: Container(
             child: Row(
@@ -110,7 +121,7 @@ class _CarDetailsState extends State<CarDetails> {
                       size: 40,
                     )),
                 Text(
-                  "Fuel Type",
+                  fuelType,
                   style: Theme.of(context).textTheme.bodyText2,
                 ),
                 Icon(Icons.arrow_forward_ios)
