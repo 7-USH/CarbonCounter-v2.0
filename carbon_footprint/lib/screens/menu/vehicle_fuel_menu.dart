@@ -143,11 +143,11 @@ class CheckBoxModel {
       image: "https://cdn-icons-png.flaticon.com/128/2729/2729276.png",
       title: "Biodiesel",
     ),
-    CheckBoxModel(
-      image:
-          "https://cdn-icons.flaticon.com/png/512/3219/premium/3219521.png?token=exp=1641834214~hmac=e4ca1e4a1a8fae6ad73fe91ac548fb11",
-      title: "CNG",
-    ),
+    // CheckBoxModel(
+    //   image:
+    //       "https://cdn-icons.flaticon.com/png/512/3219/premium/3219521.png?token=exp=1641834214~hmac=e4ca1e4a1a8fae6ad73fe91ac548fb11",
+    //   title: "CNG",
+    // ),
     CheckBoxModel(
       image: "https://cdn-icons-png.flaticon.com/128/4462/4462981.png",
       title: "Electricity",

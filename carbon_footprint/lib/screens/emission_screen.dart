@@ -1,4 +1,6 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, avoid_unnecessary_containers, prefer_const_constructors_in_immutables, must_be_immutable, unnecessary_this, avoid_print, use_key_in_widget_constructors, unused_import
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, avoid_unnecessary_containers, prefer_const_constructors_in_immutables, must_be_immutable, unnecessary_this, avoid_print, use_key_in_widget_constructors, unused_import, non_constant_identifier_names, avoid_types_as_parameter_names
+
+import 'dart:async';
 
 import 'package:carbon_footprint/constants/themes.dart';
 import 'package:carbon_footprint/models/BusDetails.dart';
@@ -12,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:vibration/vibration.dart';
 
 class EmissionPage extends StatefulWidget {
   EmissionPage({Key? key}) : super(key: key);
@@ -197,6 +200,8 @@ class _EmissionBottomBarState extends State<EmissionBottomBar> {
     }
   }
 
+  bool errorButton = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -227,15 +232,37 @@ class _EmissionBottomBarState extends State<EmissionBottomBar> {
               _askPermission();
               if (permission == LocationPermission.whileInUse ||
                   permission == LocationPermission.always) {
-                Navigator.pushNamed(context, JourneyCounter.id);
+                if (Provider.of<DataPage>(context, listen: false)
+                            .getCarType() !=
+                        "" &&
+                    Provider.of<DataPage>(context, listen: false)
+                            .getfuelType() !=
+                        "") {
+                  Navigator.pushNamed(context, JourneyCounter.id);
+                } else {
+                  Vibration.vibrate(duration: 500);
+                  setState(() {
+                    Timer(Duration(milliseconds:500 ), () {
+                      errorButton = ! errorButton;
+                      setState(() {
+                        
+                      });
+                      print(
+                          "inside" + errorButton.toString()); //prints true
+                    });
+                    errorButton = !errorButton;
+                    print(errorButton); // prints false
+                  });
+                }
               }
             },
-            onTapDown: (details) => {},
             child: Container(
               width: 200,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
-                  color: Colors.white.withOpacity(0.95),
+                  color: errorButton == true
+                      ? Colors.red.withOpacity(0.8)
+                      : Colors.white.withOpacity(0.95),
                   boxShadow: [
                     BoxShadow(
                         color: Colors.black.withOpacity(0.19),
@@ -249,8 +276,6 @@ class _EmissionBottomBarState extends State<EmissionBottomBar> {
         ));
   }
 }
-
-
 
 class ModeTiles extends StatelessWidget {
   int selectedIndex;
@@ -298,7 +323,3 @@ class ModeTiles extends StatelessWidget {
     );
   }
 }
-
-
-
-

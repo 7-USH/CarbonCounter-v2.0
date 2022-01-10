@@ -1,8 +1,10 @@
-// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, await_only_futures
 
 import 'package:carbon_footprint/screens/menu/vehicle_fuel_menu.dart';
 import 'package:carbon_footprint/screens/menu/vehicle_size_menu.dart';
+import 'package:carbon_footprint/screens/provider/data.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CarDetails extends StatefulWidget {
   const CarDetails({
@@ -40,6 +42,7 @@ class _CarDetailsState extends State<CarDetails> {
             name = await name;
             setState(() {
               carType = name as String;
+              Provider.of<DataPage>(context, listen: false).setCarType(carType);
             });
           },
           child: Container(
@@ -90,7 +93,7 @@ class _CarDetailsState extends State<CarDetails> {
             if (fuelType == "null") {
               fuelType = prevType;
             }
-            print(fuelType);
+            Provider.of<DataPage>(context, listen: false).setFuelType(fuelType);
             setState(() {});
           },
           child: Container(
