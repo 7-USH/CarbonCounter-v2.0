@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_unnecessary_containers, sized_box_for_whitespace, non_constant_identifier_names, avoid_types_as_parameter_names, prefer_const_constructors
-
 import 'package:carbon_footprint/constants/themes.dart';
 import 'package:carbon_footprint/models/tiles.dart';
 import 'package:carbon_footprint/screens/emission_screen.dart';
@@ -8,13 +6,13 @@ import 'package:carbon_footprint/widgets/circular_chart.dart';
 import 'package:carbon_footprint/widgets/info_tiles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomeScreen extends StatefulWidget {
   static String id = "HomeScreen";
   const HomeScreen({Key? key}) : super(key: key);
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -26,6 +24,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final size = MediaQuery.of(context).size;
     final now = DateTime.now();
     String name = user.displayName!;
+
+    String newName = name.split(" ")[0].firstLetterUpperCase();
+
     return Scaffold(
       bottomNavigationBar: Container(
           decoration: const BoxDecoration(
@@ -47,11 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: size.width,
                 child: Row(
                   children: [
-                    // ignore: prefer_const_constructors
                     CircleAvatar(
                       radius: 44,
                       backgroundColor: kPrimeColor,
-                      // ignore: prefer_const_constructors
                       child: CircleAvatar(
                         radius: 35,
                         backgroundImage: NetworkImage(user.photoURL!),
@@ -67,10 +66,32 @@ class _HomeScreenState extends State<HomeScreen> {
                           DateFormat.yMMMd().format(now),
                           style: Theme.of(context).textTheme.bodyText1,
                         ),
-                        Text(
-                          "Hello, "+name.split(" ")[0].toString(),
-                          style: Theme.of(context).textTheme.headline3,
-                        ),
+                        // Text(
+                        //   "Hello, "+name.split(" ")[0].toString(),
+                        //   style: Theme.of(context).textTheme.headline3,
+                        // ),
+                        SizedBox(
+                          width: 200,
+                          height: 50,
+                          child: FittedBox(
+                            alignment: Alignment.centerLeft,
+                            child: RichText(
+                              text: TextSpan(
+                                text: "Hey, ",
+                                style: Theme.of(context).textTheme.headline3,
+                                children: [
+                                  TextSpan(
+                                      text: newName,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline3),
+                                ],
+                              ),
+                            ).shimmer(
+                                primaryColor: kTextColor,
+                                secondaryColor: kPrimeColor.withOpacity(0.6)),
+                          ),
+                        )
                       ],
                     ),
                     const Spacer(),
@@ -107,6 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: size.height / 5,
                 width: double.infinity,
                 child: ListView.builder(
+                    physics: BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     itemCount: Utils.getTiles().length,
                     itemBuilder: (BuildContext, index) {
@@ -145,17 +167,13 @@ Widget myCustomButton(context) {
                 offset: const Offset(1, 10),
                 spreadRadius: 1,
                 blurRadius: 8),
-            // BoxShadow(
-            //     color: Colors.white.withOpacity(0.4),
-            //     offset: const Offset(-3, -7),
-            //     spreadRadius: -2,
-            //     blurRadius: 20),
           ],
           borderRadius: BorderRadius.circular(25)),
       child: Center(
         child: Text(
           "Reduce Emission",
-          style: Theme.of(context).textTheme.subtitle1,
+          style: GoogleFonts.firaSans(
+              color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),
         ).shimmer(
             primaryColor: Colors.white,
             secondaryColor: kPrimeColor,
