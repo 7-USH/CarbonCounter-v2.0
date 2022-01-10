@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors
 
-import 'package:carbon_footprint/screens/menu/vehicle_fuel_menu.dart';
+
 import 'package:carbon_footprint/screens/menu/vehicle_size_menu.dart';
 import 'package:flutter/material.dart';
 
@@ -81,7 +81,6 @@ class _CarDetailsState extends State<CarDetails> {
         ),
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, VehicleFuelMenu.id);
           },
           child: Container(
             child: Row(
