@@ -136,7 +136,7 @@ class _VehicleSizeMenuState extends State<VehicleSizeMenu> {
                                   border: Border.all(
                                     color: kPrimeColor,
                                     width: (activeIndex == index) ? 10 : 0,
-                                  ),
+                                  ),                                     
                                 ),
                                 child: Container(
                                   clipBehavior: Clip.antiAlias,
@@ -183,8 +183,10 @@ class _VehicleSizeMenuState extends State<VehicleSizeMenu> {
                                     offset: Offset(1, confirmed ? 4 : 8),
                                     blurRadius: 8,
                                   ),
+                                  
                                 ],
-                                borderRadius: BorderRadius.circular(25),
+                                
+                               borderRadius: BorderRadius.circular(25),
                               ),
                               height: 45,
                               child: Padding(
