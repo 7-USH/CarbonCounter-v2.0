@@ -4,6 +4,7 @@ import 'package:carbon_footprint/screens/LoadingScreen.dart';
 import 'package:carbon_footprint/screens/home_screen.dart';
 import 'package:carbon_footprint/screens/journery.dart';
 import 'package:carbon_footprint/screens/login_screen.dart';
+import 'package:carbon_footprint/screens/menu/vehicle_size_menu.dart';
 import 'package:carbon_footprint/screens/provider/data.dart';
 import 'package:carbon_footprint/screens/provider/google_sign_in.dart';
 import 'package:carbon_footprint/screens/provider/google_validate.dart.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
           JourneyCounter.id : (context) => JourneyCounter(),
           LoadingScreen.id : (context) => LoadingScreen(nextPage: const UserPage(),),
           Indicator.id : (context) => Indicator(),
+          VehicleSizeMenu.id : (context) =>VehicleSizeMenu(),
         },
       ),
     );

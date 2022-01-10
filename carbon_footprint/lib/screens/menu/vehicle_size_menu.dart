@@ -40,9 +40,14 @@ class _VehicleSizeMenuState extends State<VehicleSizeMenu> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            leading: Icon(
-              Icons.arrow_back_ios_new,
-              color: kTextColor,
+            leading: IconButton(
+              onPressed: (){
+                Navigator.pop(context, optionList["title"]![activeIndex]);
+              },
+              icon: Icon(
+                Icons.arrow_back_ios_new,
+                color: kTextColor,
+              ),
             ),
             elevation: 0,
             title: Text(
@@ -166,6 +171,8 @@ class _VehicleSizeMenuState extends State<VehicleSizeMenu> {
                               await Future.delayed(Duration(milliseconds: 200));
                               confirmed = false;
                               setState(() {});
+                              Navigator.pop(
+                                  context, optionList["title"]![activeIndex]);
                             },
                             child: Container(
                               decoration: BoxDecoration(

@@ -1,11 +1,27 @@
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors
+
+import 'package:carbon_footprint/screens/menu/vehicle_size_menu.dart';
 import 'package:flutter/material.dart';
 
-
-
-class CarDetails extends StatelessWidget {
+class CarDetails extends StatefulWidget {
   const CarDetails({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<CarDetails> createState() => _CarDetailsState();
+}
+
+class _CarDetailsState extends State<CarDetails> {
+  late String carType;
+
+  Object? name;
+
+  @override
+  void initState() {
+    super.initState();
+    carType = name == null ? "Vehicle Size" : name as String;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +32,11 @@ class CarDetails extends StatelessWidget {
       children: [
         InkWell(
           splashColor: Colors.grey,
-          onTap: () {
-            //  TODO: size page
+          onTap: () async {
+            name = await Navigator.pushNamed(context, VehicleSizeMenu.id);
+            setState(() {
+              carType = name as String;
+            });
           },
           child: Container(
             color: Colors.white24,
@@ -48,7 +67,7 @@ class CarDetails extends StatelessWidget {
                       size: 40,
                     )),
                 Text(
-                  "Vehicle Size",
+                  carType,
                   style: Theme.of(context).textTheme.bodyText2,
                 ),
                 Icon(Icons.arrow_forward_ios)
