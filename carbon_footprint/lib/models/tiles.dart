@@ -58,6 +58,7 @@ class Utils {
       EmissionTiles(color: Colors.blue, icon: Icons.food_bank_outlined, mode: "Meals"),
       EmissionTiles(color: Colors.orange, icon: Icons.place, mode: "Plane"),
       EmissionTiles(color: Colors.green, icon: Icons.air, mode: "Auto"),
+      EmissionTiles(color: Colors.teal, icon: Icons.water, mode: "Water")
     ];
   }
 }
