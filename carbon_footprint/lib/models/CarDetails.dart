@@ -38,12 +38,14 @@ class _CarDetailsState extends State<CarDetails> {
         InkWell(
           splashColor: Colors.grey,
           onTap: () async {
-            name = Navigator.pushNamed(context, VehicleSizeMenu.id);
-            name = await name;
-            setState(() {
-              carType = name as String;
-              Provider.of<DataPage>(context, listen: false).setCarType(carType);
-            });
+            var type = Navigator.pushNamed(context, VehicleSizeMenu.id);
+            var prevType = carType;
+            carType = (await type).toString();
+            if (carType == "null") {
+              carType = prevType;
+            }
+            Provider.of<DataPage>(context, listen: false).setCarType(carType);
+            setState(() {});
           },
           child: Container(
             color: Colors.white24,
