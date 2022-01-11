@@ -136,7 +136,6 @@ class _EmissionPageState extends State<EmissionPage> {
                                                 listen: false)
                                             .getIndex(index);
                                       });
-                                      
                                     },
                                     child: ModeTiles(
                                       index: index,
@@ -230,7 +229,7 @@ class _EmissionBottomBarState extends State<EmissionBottomBar> {
         child: Center(
           child: GestureDetector(
             onTap: () async {
-              _askPermission();
+              await _askPermission();
               if (permission == LocationPermission.whileInUse ||
                   permission == LocationPermission.always) {
                 if (Provider.of<DataPage>(context, listen: false)
