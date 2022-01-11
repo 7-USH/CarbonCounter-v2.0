@@ -136,6 +136,7 @@ class _EmissionPageState extends State<EmissionPage> {
                                                 listen: false)
                                             .getIndex(index);
                                       });
+                                      
                                     },
                                     child: ModeTiles(
                                       index: index,
@@ -242,13 +243,10 @@ class _EmissionBottomBarState extends State<EmissionBottomBar> {
                 } else {
                   Vibration.vibrate(duration: 500);
                   setState(() {
-                    Timer(Duration(milliseconds:500 ), () {
-                      errorButton = ! errorButton;
-                      setState(() {
-                        
-                      });
-                      print(
-                          "inside" + errorButton.toString()); //prints true
+                    Timer(Duration(milliseconds: 500), () {
+                      errorButton = !errorButton;
+                      setState(() {});
+                      print("inside" + errorButton.toString()); //prints true
                     });
                     errorButton = !errorButton;
                     print(errorButton); // prints false
@@ -270,7 +268,7 @@ class _EmissionBottomBarState extends State<EmissionBottomBar> {
                         spreadRadius: 1,
                         blurRadius: 8),
                   ]),
-              child: Center(child: Text("Start Journery")),
+              child: Center(child: Text("Start Journey")),
             ),
           ),
         ));

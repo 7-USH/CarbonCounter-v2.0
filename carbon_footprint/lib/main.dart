@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
           HomeScreen.id: (context) => const HomeScreen(),
           LoginPage.id: (context) => const LoginPage(),
           UserPage.id: (context) => const UserPage(),
-          JourneyCounter.id: (context) => JourneyCounter(),
+          JourneyCounter.id: (context) => const JourneyCounter(),
           LoadingScreen.id: (context) => LoadingScreen(
                 nextPage: const UserPage(),
               ),

@@ -1,9 +1,13 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:carbon_footprint/models/Indicator.dart';
+import 'package:carbon_footprint/screens/provider/data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:carbon_footprint/constants/themes.dart';
+import 'package:provider/provider.dart';
 
 class JourneyCounter extends StatefulWidget {
   const JourneyCounter({Key? key}) : super(key: key);
@@ -22,6 +26,18 @@ class _JourneyCounterState extends State<JourneyCounter> {
   @override
   void initState() {
     super.initState();
+    if (Provider.of<DataPage>(context, listen: false).selectedIndex == 0) {
+      vehicleType = "Car";
+    } else if (Provider.of<DataPage>(context, listen: false).selectedIndex ==
+        1) {
+      vehicleType == "Bus";
+    } else if (Provider.of<DataPage>(context, listen: false).selectedIndex ==
+        2) {
+      vehicleType == "Train";
+    } else {
+      vehicleType = "Unknown";
+    }
+    setState(() {});
   }
 
   double CarbonEmission = 100;
@@ -30,7 +46,6 @@ class _JourneyCounterState extends State<JourneyCounter> {
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
     final size = MediaQuery.of(context).size;
-    vehicleType = "Car";
 
     return Scaffold(
       body: StreamBuilder(
@@ -110,7 +125,7 @@ class _JourneyCounterState extends State<JourneyCounter> {
                                 ),
                               ),
                               Text(
-                                "Vehcile: " + vehicleType,
+                                "Travelling by " + vehicleType,
                                 style: const TextStyle(fontSize: 14),
                               )
                             ],
@@ -159,7 +174,8 @@ class _JourneyCounterState extends State<JourneyCounter> {
                                           "https://cdn-icons-png.flaticon.com/512/1196/1196775.png"),
                                     ),
                                   ),
-                                  Text("Distance: " + (distance/1000).toStringAsFixed(2))
+                                  Text("Distance: " +
+                                      (distance / 1000).toStringAsFixed(2))
                                 ],
                               ),
                               Column(
@@ -182,25 +198,42 @@ class _JourneyCounterState extends State<JourneyCounter> {
                           const SizedBox(
                             height: 28,
                           ),
-                          Container(
-                            width: 200,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              color: kGreenOne,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.19),
-                                  offset: const Offset(1, 10),
-                                  spreadRadius: 1,
-                                  blurRadius: 8,
+                          GestureDetector(
+                            onTap: () {
+                              if (Provider.of<DataPage>(context, listen: false)
+                                      .selectedIndex ==
+                                  0) {
+                                Provider.of<DataPage>(context, listen: false)
+                                    .selectedIndex = 0;
+                                Provider.of<DataPage>(context, listen: false)
+                                    .setCarType("");
+                                Provider.of<DataPage>(context, listen: false)
+                                    .setFuelType("");
+                              }
+
+                              Navigator.pop(context);
+                              // TODO: end journey phase
+                            },
+                            child: Container(
+                              width: 200,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(25),
+                                color: kGreenOne,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.19),
+                                    offset: const Offset(1, 10),
+                                    spreadRadius: 1,
+                                    blurRadius: 8,
+                                  ),
+                                ],
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  "End Journery",
+                                  style: TextStyle(color: Colors.white),
                                 ),
-                              ],
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "End Journery",
-                                style: TextStyle(color: Colors.white),
                               ),
                             ),
                           )
