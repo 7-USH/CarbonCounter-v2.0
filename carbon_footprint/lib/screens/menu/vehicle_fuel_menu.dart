@@ -88,7 +88,7 @@ class _VehicleFuelMenuState extends State<VehicleFuelMenu> {
                               textScaleFactor: 1.5,
                               style: Theme.of(context).textTheme.bodyText1,
                             ),
-                            leading: Image.network(
+                            leading: Image.asset(
                               CheckBoxModel.options[index].image,
                             ),
                             trailing: Transform.scale(
@@ -132,28 +132,27 @@ class CheckBoxModel {
 // var options = ["Petrol", "Diesel", "Biodiesel", "CNG", "Electricity", "LPG"];
   static List<CheckBoxModel> options = [
     CheckBoxModel(
-      image: "https://cdn-icons-png.flaticon.com/512/6487/6487308.png",
+      image: "assets/images/icons/Petrol.png",
       title: "Petrol",
     ),
     CheckBoxModel(
-      image: "https://cdn-icons-png.flaticon.com/512/6487/6487368.png",
+      image: "assets/images/icons/Diesel.png",
       title: "Diesel",
     ),
     CheckBoxModel(
-      image: "https://cdn-icons-png.flaticon.com/128/2729/2729276.png",
+      image: "assets/images/icons/Biodiesel.png",
       title: "Biodiesel",
     ),
-    // CheckBoxModel(
-    //   image:
-    //       "https://cdn-icons.flaticon.com/png/512/3219/premium/3219521.png?token=exp=1641834214~hmac=e4ca1e4a1a8fae6ad73fe91ac548fb11",
-    //   title: "CNG",
-    // ),
     CheckBoxModel(
-      image: "https://cdn-icons-png.flaticon.com/128/4462/4462981.png",
+      image: "assets/images/icons/CNG.png",
+      title: "CNG",
+    ),
+    CheckBoxModel(
+      image: "assets/images/icons/Electric.png",
       title: "Electricity",
     ),
     CheckBoxModel(
-      image: "https://cdn-icons-png.flaticon.com/512/2933/2933939.png",
+      image: "assets/images/icons/LPG.png",
       title: "LPG",
     ),
   ];
