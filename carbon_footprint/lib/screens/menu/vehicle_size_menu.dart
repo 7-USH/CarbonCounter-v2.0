@@ -24,7 +24,7 @@ class _VehicleSizeMenuState extends State<VehicleSizeMenu> {
     ],
     "title": [
       "Hatch back",
-      "Cedan",
+      "Sedan",
       "SUV",
     ]
   };
