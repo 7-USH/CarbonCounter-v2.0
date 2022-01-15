@@ -15,14 +15,17 @@ import 'package:velocity_x/velocity_x.dart';
 
 class HomeScreen extends StatefulWidget {
   static String id = "HomeScreen";
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
+
+  final CollectionReference userData =
+      FirebaseFirestore.instance.collection("Users");
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late double totalEmission;
+  double totalEmission = 0;
   final user = FirebaseAuth.instance.currentUser!;
   @override
   void initState() {
@@ -38,121 +41,125 @@ class _HomeScreenState extends State<HomeScreen> {
 
     String newName = name.split(" ")[0].firstLetterUpperCase();
 
-    return Scaffold(
-      bottomNavigationBar: Container(
-          decoration: const BoxDecoration(
-              gradient:
-                  LinearGradient(colors: [kPrimeColor, kGreenOne, kGreenTwo])),
-          child: const MyButtomNavigationBar()),
-      body: Container(
-        decoration: const BoxDecoration(
-            gradient:
-                LinearGradient(colors: [kPrimeColor, kGreenOne, kGreenTwo])),
-        child: SafeArea(
-          child: Column(
-            children: [
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 22),
-                color: Colors.transparent,
-                height: size.height / 7,
-                width: size.width,
-                child: Row(
+    return totalEmission.isNaN
+        ? CircularProgressIndicator()
+        : Scaffold(
+            bottomNavigationBar: Container(
+                decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                        colors: [kPrimeColor, kGreenOne, kGreenTwo])),
+                child: const MyButtomNavigationBar()),
+            body: Container(
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: [kPrimeColor, kGreenOne, kGreenTwo])),
+              child: SafeArea(
+                child: Column(
                   children: [
-                    // ignore: prefer_const_constructors
-                    CircleAvatar(
-                      radius: 44,
-                      backgroundColor: kPrimeColor,
-                      // ignore: prefer_const_constructors
-                      child: CircleAvatar(
-                        radius: 35,
-                        backgroundImage: NetworkImage(user.photoURL!),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 22),
+                      color: Colors.transparent,
+                      height: size.height / 7,
+                      width: size.width,
+                      child: Row(
+                        children: [
+                          // ignore: prefer_const_constructors
+                          CircleAvatar(
+                            radius: 44,
+                            backgroundColor: kPrimeColor,
+                            // ignore: prefer_const_constructors
+                            child: CircleAvatar(
+                              radius: 35,
+                              backgroundImage: NetworkImage(user.photoURL!),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                DateFormat.yMMMd().format(now),
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                              SizedBox(
+                                width: 200,
+                                height: 50,
+                                child: FittedBox(
+                                  alignment: Alignment.centerLeft,
+                                  child: RichText(
+                                      text: TextSpan(
+                                          text: "Hey, ",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline3,
+                                          children: [
+                                        TextSpan(
+                                            text: newName,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline3),
+                                      ])).shimmer(
+                                      primaryColor: kTextColor,
+                                      secondaryColor:
+                                          kPrimeColor.withOpacity(0.6)),
+                                ),
+                              )
+                            ],
+                          ),
+                          const Spacer(),
+                          IconButton(
+                            onPressed: () {
+                              // TODO: homepage menu/ drawer
+                            },
+                            icon: const Icon(Icons.menu, color: kTextColor),
+                          ),
+                        ],
                       ),
                     ),
+                    CircularChart(
+                      // TODO: here enter the Calculated Number
+                      // and percentage of Co2 Emission as of today
+
+                      calculationNumber: totalEmission,
+                      width: size.width / 3,
+                      height: size.height / 3,
+                      painter: ProgressPainter(
+                          circleWidth: size.width / 17,
+                          completedPercentage: 90,
+                          defaultCircleColor: Colors.white.withOpacity(0.95),
+                          percentageCompletedCircleColor: kPrimeColor),
+                    ),
                     const SizedBox(
-                      width: 20,
+                      height: 10,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          DateFormat.yMMMd().format(now),
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        SizedBox(
-                          width: 200,
-                          height: 50,
-                          child: FittedBox(
-                            alignment: Alignment.centerLeft,
-                            child: RichText(
-                                text: TextSpan(
-                                    text: "Hey, ",
-                                    style:
-                                        Theme.of(context).textTheme.headline3,
-                                    children: [
-                                  TextSpan(
-                                      text: newName,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline3),
-                                ])).shimmer(
-                                primaryColor: kTextColor,
-                                secondaryColor: kPrimeColor.withOpacity(0.6)),
-                          ),
-                        )
-                      ],
+                    Text(
+                      "So far this month",
+                      style: Theme.of(context).textTheme.bodyText2,
                     ),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () {
-                        // TODO: homepage menu/ drawer
-                      },
-                      icon: const Icon(Icons.menu, color: kTextColor),
+                    Container(
+                      height: size.height / 5,
+                      width: double.infinity,
+                      child: ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemCount: Utils.getTiles().length,
+                          itemBuilder: (BuildContext, index) {
+                            return InfoTiles(
+                                color: Utils.getTiles()[index].color,
+                                icon: Utils.getTiles()[index].icon,
+                                text: Utils.getTiles()[index].sentence,
+                                percent: Utils.getTiles()[index].emission);
+                          }),
                     ),
+                    myCustomButton(context)
                   ],
                 ),
               ),
-              CircularChart(
-                // TODO: here enter the Calculated Number
-                // and percentage of Co2 Emission as of today
-
-                calculationNumber: totalEmission,
-                width: size.width / 3,
-                height: size.height / 3,
-                painter: ProgressPainter(
-                    circleWidth: size.width / 17,
-                    completedPercentage: 90,
-                    defaultCircleColor: Colors.white.withOpacity(0.95),
-                    percentageCompletedCircleColor: kPrimeColor),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                "So far this month",
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-              Container(
-                height: size.height / 5,
-                width: double.infinity,
-                child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: Utils.getTiles().length,
-                    itemBuilder: (BuildContext, index) {
-                      return InfoTiles(
-                          color: Utils.getTiles()[index].color,
-                          icon: Utils.getTiles()[index].icon,
-                          text: Utils.getTiles()[index].sentence,
-                          percent: Utils.getTiles()[index].emission);
-                    }),
-              ),
-              myCustomButton(context)
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
   }
 
   addUser() async {
