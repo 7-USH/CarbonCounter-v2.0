@@ -1,8 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:carbon_footprint/models/Indicator.dart';
-import 'package:carbon_footprint/models/fieldCalc.dart';
 import 'package:carbon_footprint/screens/provider/data.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -23,7 +23,6 @@ class _JourneyCounterState extends State<JourneyCounter> {
   Position? prevLocation;
   bool isVisibile = false;
   String vehicleType = "";
-  double constant = 0;
 
   @override
   void initState() {
@@ -39,13 +38,6 @@ class _JourneyCounterState extends State<JourneyCounter> {
     } else {
       vehicleType = "Unknown";
     }
-
-    String fuelType =
-        Provider.of<DataPage>(context, listen: false).getfuelType();
-
-    if (fuelType == "Petrol") {
-      //TODO:Amogh
-    }
     setState(() {});
   }
 
@@ -55,6 +47,7 @@ class _JourneyCounterState extends State<JourneyCounter> {
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
     final size = MediaQuery.of(context).size;
+    String userCode = user.uid.toString();
 
     return Scaffold(
       body: StreamBuilder(
@@ -198,7 +191,7 @@ class _JourneyCounterState extends State<JourneyCounter> {
                                     ),
                                   ),
                                   Text(
-                                    "Footprint: " + 100.toString(),
+                                    "Footprint: " + CarbonEmission.toString(),
                                   ),
                                 ],
                               ),
@@ -222,6 +215,7 @@ class _JourneyCounterState extends State<JourneyCounter> {
 
                               Navigator.pop(context);
                               // TODO: end journey phase
+                              addData(userCode);
                             },
                             child: Container(
                               width: 200,
@@ -259,5 +253,24 @@ class _JourneyCounterState extends State<JourneyCounter> {
         },
       ),
     );
+  }
+
+  addData(String userCode) async {
+    CollectionReference userData =
+        FirebaseFirestore.instance.collection("Users");
+
+    userData.snapshots().listen((snapshot) {});
+    var docSnapshot = await userData.doc(userCode).get();
+    var totalEmission = docSnapshot.get('totalEmission');
+    totalEmission += CarbonEmission;
+
+    Map<String, dynamic> demodata = {
+      "Distance": distance,
+      "Emission": CarbonEmission,
+      "Type": vehicleType,
+      "totalEmission": totalEmission
+    };
+
+    userData.doc(userCode).set(demodata);
   }
 }
