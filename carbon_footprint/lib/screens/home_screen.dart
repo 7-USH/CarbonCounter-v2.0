@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_unnecessary_containers, sized_box_for_whitespace, non_constant_identifier_names, avoid_types_as_parameter_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carbon_footprint/constants/themes.dart';
 import 'package:carbon_footprint/models/tiles.dart';
 import 'package:carbon_footprint/screens/emission_screen.dart';
@@ -74,27 +75,26 @@ class _HomeScreenState extends State<HomeScreen> {
                           //   "Hello, "+name.split(" ")[0].toString(),
                           //   style: Theme.of(context).textTheme.headline3,
                           // ),
-                          SizedBox(
-                            width: 200,
-                            height:50,
+                          Flexible(
                             child: FittedBox(
                               alignment: Alignment.centerLeft,
-                              child: RichText(
-                                  text: TextSpan(
-                                      text: "Hey, ",
-                                      style: Theme.of(context).textTheme.headline3,
-                                      children: [
-                                    TextSpan(
-                                        text: newName,
-                                        style:
-                                            Theme.of(context).textTheme.headline3
-                                            ),                           
-                                  ])).shimmer(
-                                    primaryColor: kTextColor,
-                                    secondaryColor: kPrimeColor.withOpacity(0.6)
-                                  ),
-                            ),
-                          )
+                              child:  RichText(
+                                    text: TextSpan(
+                                        text: "Hey, ",
+                                        style: Theme.of(context).textTheme.headline3,
+                                        children: [
+                                      TextSpan(
+                                          text: newName,
+                                          style:
+                                              Theme.of(context).textTheme.headline3
+                                              ),                           
+                                    ])).shimmer(
+                                      primaryColor: kTextColor,
+                                      secondaryColor: kPrimeColor.withOpacity(0.6)
+                                    ),
+                              ),
+                          ),
+                        
                         ],
                       ),
                       const Spacer(),

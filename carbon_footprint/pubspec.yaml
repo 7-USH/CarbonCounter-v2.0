@@ -48,6 +48,7 @@ dependencies:
   google_maps_flutter: ^2.1.1
   carousel_slider: ^4.0.0
   vibration: ^1.7.4-nullsafety.0
+  auto_size_text: ^3.0.0
 
 
 dev_dependencies:

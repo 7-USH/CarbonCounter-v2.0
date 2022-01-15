@@ -134,7 +134,7 @@ class _EmissionPageState extends State<EmissionPage> {
                                       setState(() {
                                         Provider.of<DataPage>(context,
                                                 listen: false)
-                                            .getIndex(index);
+                                            .getIndex(selectedIndex);
                                       });
                                     },
                                     child: ModeTiles(
