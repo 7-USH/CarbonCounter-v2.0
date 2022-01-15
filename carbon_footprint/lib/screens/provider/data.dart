@@ -4,7 +4,7 @@ class DataPage extends ChangeNotifier {
   int selectedIndex = 0;
   String fuelType = "";
   String carType = "";
-
+  
   getIndex(int index) {
     selectedIndex = index;
     notifyListeners();

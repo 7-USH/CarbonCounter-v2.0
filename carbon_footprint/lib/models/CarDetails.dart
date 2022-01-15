@@ -122,7 +122,7 @@ class _CarDetailsState extends State<CarDetails> {
                               blurRadius: 20),
                         ]),
                     child: Icon(
-                      Icons.bike_scooter,
+                      const IconData(0xe905, fontFamily: '2sh'),
                       size: 40,
                     )),
                 Text(
