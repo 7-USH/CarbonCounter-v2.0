@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:carbon_footprint/models/Indicator.dart';
+import 'package:carbon_footprint/models/fieldCalc.dart';
 import 'package:carbon_footprint/screens/provider/data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class _JourneyCounterState extends State<JourneyCounter> {
   Position? prevLocation;
   bool isVisibile = false;
   String vehicleType = "";
+  double constant = 0;
 
   @override
   void initState() {
@@ -37,10 +39,17 @@ class _JourneyCounterState extends State<JourneyCounter> {
     } else {
       vehicleType = "Unknown";
     }
+
+    String fuelType =
+        Provider.of<DataPage>(context, listen: false).getfuelType();
+
+    if (fuelType == "Petrol") {
+      //TODO:Amogh
+    }
     setState(() {});
   }
 
-  double CarbonEmission = 100;
+  double CarbonEmission = 0;
 
   @override
   Widget build(BuildContext context) {
