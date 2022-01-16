@@ -13,8 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/menu/vehicle_fuel_menu.dart';
 
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -40,7 +38,7 @@ class MyApp extends StatelessWidget {
         theme: appTheme,
         initialRoute: LoadingScreen.id,
         routes: {
-          HomeScreen.id: (context) => const HomeScreen(),
+          HomeScreen.id: (context) => HomeScreen(),
           LoginPage.id: (context) => const LoginPage(),
           UserPage.id: (context) => const UserPage(),
           JourneyCounter.id: (context) => const JourneyCounter(),
