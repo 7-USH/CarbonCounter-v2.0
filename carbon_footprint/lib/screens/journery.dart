@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:carbon_footprint/models/Indicator.dart';
+import 'package:carbon_footprint/models/fieldCalc.dart';
 import 'package:carbon_footprint/screens/provider/data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,6 +24,8 @@ class _JourneyCounterState extends State<JourneyCounter> {
   Position? prevLocation;
   bool isVisibile = false;
   String vehicleType = "";
+  double footprint = 0;
+  String fuelType = "";
 
   @override
   void initState() {
@@ -38,6 +41,7 @@ class _JourneyCounterState extends State<JourneyCounter> {
     } else {
       vehicleType = "Unknown";
     }
+    fuelType = Provider.of<DataPage>(context, listen: false).getfuelType();
     setState(() {});
   }
 
@@ -64,6 +68,22 @@ class _JourneyCounterState extends State<JourneyCounter> {
                   prevLocation!.longitude,
                   location!.latitude,
                   location.longitude);
+
+              if (fuelType == "Petrol") {
+                var carType =
+                    Provider.of<DataPage>(context, listen: false).getCarType();
+                if (carType == "Hatch back") {
+                  footprint =
+                      CarbonCalculator.cal_car_petrol_mil(24.5, distance);
+                } else if (carType == "Sedan") {
+                  footprint =
+                      CarbonCalculator.cal_car_petrol_mil(25.16, distance);
+                } else if (carType == "SUV") {
+                  footprint =
+                      CarbonCalculator.cal_car_petrol_mil(23.14, distance);
+                }
+              }
+                  
             }
             prevLocation = snapshot.data as Position?;
             return Stack(
@@ -176,8 +196,8 @@ class _JourneyCounterState extends State<JourneyCounter> {
                                           "https://cdn-icons-png.flaticon.com/512/1196/1196775.png"),
                                     ),
                                   ),
-                                  Text("Distance: " +
-                                      (distance / 1000).toStringAsFixed(2))
+                                  Text((distance / 1000).toStringAsFixed(2) +
+                                      " km")
                                 ],
                               ),
                               Column(
@@ -191,7 +211,8 @@ class _JourneyCounterState extends State<JourneyCounter> {
                                     ),
                                   ),
                                   Text(
-                                    "Footprint: " + CarbonEmission.toString(),
+                                    (footprint / 1000).toStringAsFixed(2) +
+                                        " kg",
                                   ),
                                 ],
                               ),
