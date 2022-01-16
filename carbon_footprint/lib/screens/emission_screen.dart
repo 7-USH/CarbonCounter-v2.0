@@ -18,6 +18,7 @@ import 'package:vibration/vibration.dart';
 
 class EmissionPage extends StatefulWidget {
   EmissionPage({Key? key}) : super(key: key);
+  static String id = "Emission";
 
   @override
   _EmissionPageState createState() => _EmissionPageState();
@@ -238,7 +239,9 @@ class _EmissionBottomBarState extends State<EmissionBottomBar> {
                     Provider.of<DataPage>(context, listen: false)
                             .getfuelType() !=
                         "") {
-                  Navigator.pushNamed(context, JourneyCounter.id);
+                  Navigator.pushNamed(context, JourneyCounter.id)
+                      .then((_) => setState(() {}));
+                  ;
                 } else {
                   Vibration.vibrate(duration: 500);
                   setState(() {

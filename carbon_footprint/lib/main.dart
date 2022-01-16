@@ -1,6 +1,7 @@
 import 'package:carbon_footprint/constants/themes.dart';
 import 'package:carbon_footprint/models/Indicator.dart';
 import 'package:carbon_footprint/screens/LoadingScreen.dart';
+import 'package:carbon_footprint/screens/emission_screen.dart';
 import 'package:carbon_footprint/screens/home_screen.dart';
 import 'package:carbon_footprint/screens/journery.dart';
 import 'package:carbon_footprint/screens/login_screen.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
           Indicator.id: (context) => Indicator(),
           VehicleSizeMenu.id: (context) => VehicleSizeMenu(),
           VehicleFuelMenu.id: (context) => VehicleFuelMenu(),
+          EmissionPage.id : (context) => EmissionPage(),
         },
       ),
     );

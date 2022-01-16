@@ -45,7 +45,7 @@ class _JourneyCounterState extends State<JourneyCounter> {
     setState(() {});
   }
 
-  double CarbonEmission = 0;
+  double carbonEmission = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +83,6 @@ class _JourneyCounterState extends State<JourneyCounter> {
                       CarbonCalculator.cal_car_petrol_mil(23.14, distance);
                 }
               }
-                  
             }
             prevLocation = snapshot.data as Position?;
             return Stack(
@@ -283,11 +282,12 @@ class _JourneyCounterState extends State<JourneyCounter> {
     userData.snapshots().listen((snapshot) {});
     var docSnapshot = await userData.doc(userCode).get();
     var totalEmission = docSnapshot.get('totalEmission');
-    totalEmission += CarbonEmission;
+    totalEmission += double.parse((footprint / 1000).toStringAsFixed(2));
+    carbonEmission = double.parse((footprint / 1000).toStringAsFixed(2));
 
     Map<String, dynamic> demodata = {
       "Distance": distance,
-      "Emission": CarbonEmission,
+      "Emission": carbonEmission,
       "Type": vehicleType,
       "totalEmission": totalEmission
     };

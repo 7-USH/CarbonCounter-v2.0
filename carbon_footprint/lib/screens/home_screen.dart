@@ -33,6 +33,43 @@ class _HomeScreenState extends State<HomeScreen> {
     addUser();
   }
 
+  Widget myCustomButton(context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, EmissionPage.id).then((_) {
+          // you have come back to your Settings screen
+          HomeScreen();
+
+        });  
+      },
+      child: Container(
+        margin: const EdgeInsets.only(top: 10),
+        height: 60,
+        width: 200,
+        decoration: BoxDecoration(
+            gradient: const LinearGradient(colors: [kPrimeColor, kGreenOne]),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black.withOpacity(0.19),
+                  offset: const Offset(1, 10),
+                  spreadRadius: 1,
+                  blurRadius: 8),
+            ],
+            borderRadius: BorderRadius.circular(25)),
+        child: Center(
+          child: Text(
+            "Reduce Emission",
+            style: GoogleFonts.firaSans(
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),
+          ).shimmer(
+              primaryColor: Colors.white,
+              secondaryColor: kPrimeColor,
+              duration: const Duration(seconds: 6)),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -194,39 +231,4 @@ class _HomeScreenState extends State<HomeScreen> {
     totalEmission = double.parse(docSnapshot.get("Emission").toString());
     setState(() {});
   }
-}
-
-Widget myCustomButton(context) {
-  return GestureDetector(
-    onTap: () {
-      Navigator.push(context, MaterialPageRoute(builder: (BuildContext) {
-        return EmissionPage();
-      }));
-    },
-    child: Container(
-      margin: const EdgeInsets.only(top: 10),
-      height: 60,
-      width: 200,
-      decoration: BoxDecoration(
-          gradient: const LinearGradient(colors: [kPrimeColor, kGreenOne]),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.black.withOpacity(0.19),
-                offset: const Offset(1, 10),
-                spreadRadius: 1,
-                blurRadius: 8),
-          ],
-          borderRadius: BorderRadius.circular(25)),
-      child: Center(
-        child: Text(
-          "Reduce Emission",
-          style: GoogleFonts.firaSans(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),
-        ).shimmer(
-            primaryColor: Colors.white,
-            secondaryColor: kPrimeColor,
-            duration: const Duration(seconds: 6)),
-      ),
-    ),
-  );
 }
