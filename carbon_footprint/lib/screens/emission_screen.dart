@@ -6,6 +6,7 @@ import 'package:carbon_footprint/constants/themes.dart';
 import 'package:carbon_footprint/models/BusDetails.dart';
 import 'package:carbon_footprint/models/CarDetails.dart';
 import 'package:carbon_footprint/models/tiles.dart';
+import 'package:carbon_footprint/screens/journery.dart';
 import 'package:carbon_footprint/screens/login_screen.dart';
 import 'package:carbon_footprint/screens/provider/data.dart';
 import 'package:carbon_footprint/screens/provider/google_sign_in.dart';
@@ -14,8 +15,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:vibration/vibration.dart';
-
-import 'journey.dart';
 
 class EmissionPage extends StatefulWidget {
   EmissionPage({Key? key}) : super(key: key);

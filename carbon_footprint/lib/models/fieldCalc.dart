@@ -1,4 +1,4 @@
-class CarbonCalculator {
+class CarbonCalculator{
   var petrol_lit = 2.33;
   var diesel_lit = 2.68;
   var car_cng_kg = 3.06;
@@ -9,7 +9,7 @@ class CarbonCalculator {
   var lpg_unit = 42.50;
   var electricity_KWH = 0.90;
 
-  static double cal_car_petrol_mil(double mileage, double distance) {
+  static double  cal_car_petrol_mil(double mileage, double distance) {
     return (2.33 * (distance / mileage));
   }
 
@@ -44,4 +44,5 @@ class CarbonCalculator {
   double cal_electricity(var unit) {
     return (electricity_KWH * unit);
   }
+  
 }

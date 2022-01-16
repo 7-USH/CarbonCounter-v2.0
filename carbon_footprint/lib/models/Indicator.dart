@@ -97,8 +97,8 @@ class _ColorLoader3State extends State<ColorLoader3>
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-            gradient:
-                LinearGradient(colors: [kPrimeColor, kGreenOne, kGreenTwo])),
+          gradient: LinearGradient(colors: [kPrimeColor,kGreenOne,kGreenTwo])
+        ),
         child: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Image.asset(
@@ -108,10 +108,9 @@ class _ColorLoader3State extends State<ColorLoader3>
             SizedBox(
               height: 20,
             ),
-            Text(
-              "Carbon Counter",
-              style: TextStyle(fontSize: 30),
-            ),
+            Text("Carbon Counter",style: TextStyle(
+              fontSize: 30
+            ),),
             SizedBox(
               height: 20,
             ),
@@ -127,6 +126,7 @@ class _ColorLoader3State extends State<ColorLoader3>
                     child: Center(
                       child: Stack(
                         children: <Widget>[
+                        
                           Transform.translate(
                             offset: Offset(0.0, 0.0),
                             child: Dot(
