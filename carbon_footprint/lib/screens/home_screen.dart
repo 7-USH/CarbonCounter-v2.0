@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: size.height / 3,
                       painter: ProgressPainter(
                           circleWidth: size.width / 17,
-                          completedPercentage: 90,
+                          completedPercentage: totalEmission,
                           defaultCircleColor: Colors.white.withOpacity(0.95),
                           percentageCompletedCircleColor: kPrimeColor),
                     ),
@@ -191,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     userData.snapshots().listen((snapshot) {});
     var docSnapshot = await userData.doc(userCode).get();
-    totalEmission = docSnapshot.get('totalEmission');
+    totalEmission = double.parse(docSnapshot.get("Emission").toString());
     setState(() {});
   }
 }
