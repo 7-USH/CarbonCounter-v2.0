@@ -129,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       painter: ProgressPainter(
                           circleWidth: size.width / 17,
                           completedPercentage: totalEmission,
-                          defaultCircleColor: Colors.white.withOpacity(0.95),
+                          defaultCircleColor: kSecondaryColor.withOpacity(1),
                           percentageCompletedCircleColor: kPrimeColor),
                     ),
                     const SizedBox(
