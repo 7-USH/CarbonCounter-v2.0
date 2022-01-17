@@ -2,6 +2,7 @@
 
 import 'package:carbon_footprint/models/Indicator.dart';
 import 'package:carbon_footprint/models/fieldCalc.dart';
+import 'package:carbon_footprint/screens/home_screen.dart';
 import 'package:carbon_footprint/screens/provider/data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -69,8 +70,6 @@ class _JourneyCounterState extends State<JourneyCounter> {
                   location!.latitude,
                   location.longitude);
 
-                  
-
               if (fuelType == "Petrol") {
                 var carType =
                     Provider.of<DataPage>(context, listen: false).getCarType();
@@ -101,23 +100,17 @@ class _JourneyCounterState extends State<JourneyCounter> {
                 }
               }
 
-                 if (fuelType == "CNG") {
+              if (fuelType == "CNG") {
                 var carType =
                     Provider.of<DataPage>(context, listen: false).getCarType();
                 if (carType == "Hatch back") {
-                  footprint =
-                      CarbonCalculator.cal_car_cng(24.5, distance);
+                  footprint = CarbonCalculator.cal_car_cng(24.5, distance);
                 } else if (carType == "Sedan") {
-                  footprint =
-                      CarbonCalculator.cal_car_cng(25.16, distance);
+                  footprint = CarbonCalculator.cal_car_cng(25.16, distance);
                 } else if (carType == "SUV") {
-                  footprint =
-                      CarbonCalculator.cal_car_cng(23.14, distance);
+                  footprint = CarbonCalculator.cal_car_cng(23.14, distance);
                 }
               }
-
-
-
             }
             prevLocation = snapshot.data as Position?;
             return Stack(
@@ -268,7 +261,10 @@ class _JourneyCounterState extends State<JourneyCounter> {
                                     .setFuelType("");
                               }
 
-                              Navigator.pop(context);
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  HomeScreen.id,
+                                  ModalRoute.withName(HomeScreen.id));
                               // TODO: end journey phase
                               addData(userCode);
                             },

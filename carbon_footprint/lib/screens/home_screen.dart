@@ -28,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   double totalEmission = 0;
   final user = FirebaseAuth.instance.currentUser!;
 
+  
 
   @override
   void initState() {
@@ -37,12 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget myCustomButton(context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, EmissionPage.id).then((_) {
-          // you have come back to your Settings screen
-          HomeScreen();
-
-        });  
+      onTap: () async {
+        Navigator.pushNamed(context,
+            EmissionPage.id).then((value) => initState); // you have come back to your Settings screen
+        
       },
       child: Container(
         margin: const EdgeInsets.only(top: 10),
