@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_const_constructors_in_immutables, must_be_immutable
 
 import 'package:carbon_footprint/constants/themes.dart';
+import 'package:carbon_footprint/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoadingScreen extends StatefulWidget {
@@ -25,8 +26,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration(seconds: widget.duration), () {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => widget.nextPage));
+      Navigator.pushAndRemoveUntil(
+          context, MaterialPageRoute(builder: (context) => widget.nextPage),ModalRoute.withName(HomeScreen.id));
     });
 
     return Scaffold(

@@ -260,13 +260,13 @@ class _JourneyCounterState extends State<JourneyCounter> {
                                 Provider.of<DataPage>(context, listen: false)
                                     .setFuelType("");
                               }
-
+                              addData(userCode);
                               Navigator.pushNamedAndRemoveUntil(
                                   context,
                                   HomeScreen.id,
                                   ModalRoute.withName(HomeScreen.id));
                               // TODO: end journey phase
-                              addData(userCode);
+                              
                             },
                             child: Container(
                               width: 200,
