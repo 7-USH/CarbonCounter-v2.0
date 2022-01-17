@@ -161,7 +161,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     CircularChart(
                       // TODO: here enter the Calculated Number
                       // and percentage of Co2 Emission as of today
-
                       calculationNumber: totalEmission,
                       width: size.width / 3,
                       height: size.height / 3,
