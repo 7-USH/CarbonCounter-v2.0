@@ -253,11 +253,7 @@ packages:
       name: google_maps_flutter_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.1.4"
-=======
     version: "2.1.5"
->>>>>>> master
   google_sign_in:
     dependency: "direct main"
     description:
@@ -369,11 +365,7 @@ packages:
       name: path_provider_linux
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.1.4"
-=======
     version: "2.1.5"
->>>>>>> master
   path_provider_macos:
     dependency: transitive
     description:
@@ -387,11 +379,7 @@ packages:
       name: path_provider_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.0.2"
-=======
     version: "2.0.3"
->>>>>>> master
   path_provider_windows:
     dependency: transitive
     description:
