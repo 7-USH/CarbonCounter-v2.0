@@ -1,12 +1,31 @@
-// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, await_only_futures, file_names
 
+import 'package:carbon_footprint/screens/menu/vehicle_fuel_menu.dart';
+import 'package:carbon_footprint/screens/menu/vehicle_model.dart';
+import 'package:carbon_footprint/screens/menu/vehicle_size_menu.dart';
+import 'package:carbon_footprint/screens/provider/data.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-
-class BusDetails extends StatelessWidget {
+class BusDetails extends StatefulWidget {
   const BusDetails({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<BusDetails> createState() => _BusDetailsState();
+}
+
+class _BusDetailsState extends State<BusDetails> {
+  late String busType;
+
+  Object? name;
+
+  @override
+  void initState() {
+    super.initState();
+    busType = name == null ? "Bus type" : name as String;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +36,21 @@ class BusDetails extends StatelessWidget {
       children: [
         InkWell(
           splashColor: Colors.grey,
-          onTap: () {
-            //  TODO: size page
+          onTap: () async {
+            await VehicleModel.bus();
+            var type = Navigator.pushNamed(context, VehicleSizeMenu.id);
+            var prevType = busType;
+            busType = (await type).toString();
+            if (busType == "null") {
+              busType = prevType;
+            }
+            Provider.of<DataPage>(context, listen: false).setCarType(busType);
+            if(busType == "Electric bus") {
+              Provider.of<DataPage>(context, listen: false).setFuelType("Electricity");
+            } else {
+              Provider.of<DataPage>(context, listen: false).setFuelType("Diesel");
+            }
+            setState(() {});
           },
           child: Container(
             color: Colors.white24,
@@ -49,7 +81,7 @@ class BusDetails extends StatelessWidget {
                       size: 40,
                     )),
                 Text(
-                  "Bus Type",
+                  busType,
                   style: Theme.of(context).textTheme.bodyText2,
                 ),
                 Icon(Icons.arrow_forward_ios)
@@ -57,6 +89,10 @@ class BusDetails extends StatelessWidget {
             ),
           ),
         ),
+        SizedBox(
+          height: 40,
+        ),
+        
       ],
     ));
   }

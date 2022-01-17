@@ -2,6 +2,7 @@
 
 import 'package:carbon_footprint/models/Indicator.dart';
 import 'package:carbon_footprint/models/fieldCalc.dart';
+import 'package:carbon_footprint/screens/menu/vehicle_model.dart';
 import 'package:carbon_footprint/screens/provider/data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -69,8 +70,6 @@ class _JourneyCounterState extends State<JourneyCounter> {
                   location!.latitude,
                   location.longitude);
 
-                  
-
               if (fuelType == "Petrol") {
                 var carType =
                     Provider.of<DataPage>(context, listen: false).getCarType();
@@ -101,23 +100,17 @@ class _JourneyCounterState extends State<JourneyCounter> {
                 }
               }
 
-                 if (fuelType == "CNG") {
+              if (fuelType == "CNG") {
                 var carType =
                     Provider.of<DataPage>(context, listen: false).getCarType();
                 if (carType == "Hatch back") {
-                  footprint =
-                      CarbonCalculator.cal_car_cng(24.5, distance);
+                  footprint = CarbonCalculator.cal_car_cng(24.5, distance);
                 } else if (carType == "Sedan") {
-                  footprint =
-                      CarbonCalculator.cal_car_cng(25.16, distance);
+                  footprint = CarbonCalculator.cal_car_cng(25.16, distance);
                 } else if (carType == "SUV") {
-                  footprint =
-                      CarbonCalculator.cal_car_cng(23.14, distance);
+                  footprint = CarbonCalculator.cal_car_cng(23.14, distance);
                 }
               }
-
-
-
             }
             prevLocation = snapshot.data as Position?;
             return Stack(
@@ -181,7 +174,7 @@ class _JourneyCounterState extends State<JourneyCounter> {
                                 ),
                               ),
                               Text(
-                                "Travelling by " + vehicleType,
+                                "Travelling by " + VehicleModel.type,
                                 style: const TextStyle(fontSize: 14),
                               )
                             ],
@@ -230,8 +223,8 @@ class _JourneyCounterState extends State<JourneyCounter> {
                                           "https://cdn-icons-png.flaticon.com/512/1196/1196775.png"),
                                     ),
                                   ),
-                                  Text( 
-                                      (distance / 1000).toStringAsFixed(2)+" km")
+                                  Text((distance / 1000).toStringAsFixed(2) +
+                                      " km")
                                 ],
                               ),
                               Column(
@@ -245,7 +238,8 @@ class _JourneyCounterState extends State<JourneyCounter> {
                                     ),
                                   ),
                                   Text(
-                                    (footprint/1000).toStringAsFixed(2)+" kg",
+                                    (footprint / 1000).toStringAsFixed(2) +
+                                        " kg",
                                   ),
                                 ],
                               ),

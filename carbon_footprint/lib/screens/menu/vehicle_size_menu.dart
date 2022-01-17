@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_constructors_in_immutables
 
 import 'package:carbon_footprint/constants/themes.dart';
+import 'package:carbon_footprint/screens/menu/vehicle_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -16,19 +17,6 @@ class _VehicleSizeMenuState extends State<VehicleSizeMenu> {
   int activeIndex = 0;
   bool confirmed = false;
 
-  var optionList = {
-    "image": [
-      "https://stimg.cardekho.com/images/carexteriorimages/630x420/Maruti/Swift/8378/1614747593719/front-left-side-47.jpg?impolicy=resize&imwidth=420",
-      "https://s7d1.scene7.com/is/image/hyundai/category-page-sonata-hybrid-01-1:4-3?qlt=85,0",
-      "https://images.unsplash.com/photo-1612057473166-af2affdb92ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c3V2fGVufDB8fDB8fA%3D%3D&w=1000&q=80",
-    ],
-    "title": [
-      "Hatch back",
-      "Sedan",
-      "SUV",
-    ]
-  };
-
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -41,8 +29,9 @@ class _VehicleSizeMenuState extends State<VehicleSizeMenu> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             leading: IconButton(
-              onPressed: (){
-                Navigator.pop(context, optionList["title"]![activeIndex]);
+              onPressed: () {
+                Navigator.pop(
+                    context, VehicleModel.optionList[activeIndex].title);
               },
               icon: Icon(
                 Icons.arrow_back_ios_new,
@@ -85,7 +74,7 @@ class _VehicleSizeMenuState extends State<VehicleSizeMenu> {
                               Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
                                 child: Text(
-                                  "What type of car are you travelling in today?",
+                                  "What type of ${VehicleModel.type} are you travelling in today?",
                                   textScaleFactor: 0.5,
                                   style: Theme.of(context).textTheme.headline2,
                                 ),
@@ -115,7 +104,7 @@ class _VehicleSizeMenuState extends State<VehicleSizeMenu> {
                     child: Column(
                       children: [
                         CarouselSlider.builder(
-                          itemCount: optionList["image"]!.length,
+                          itemCount: VehicleModel.optionList.length,
                           options: CarouselOptions(
                             height: MediaQuery.of(context).size.height / 2.7,
                             enlargeCenterPage: true,
@@ -126,7 +115,7 @@ class _VehicleSizeMenuState extends State<VehicleSizeMenu> {
                             },
                           ),
                           itemBuilder: (context, index, realIndex) {
-                            final image = optionList["image"]![index];
+                            final image = VehicleModel.optionList[index].image;
                             return Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: Container(
@@ -136,7 +125,7 @@ class _VehicleSizeMenuState extends State<VehicleSizeMenu> {
                                   border: Border.all(
                                     color: kPrimeColor,
                                     width: (activeIndex == index) ? 10 : 0,
-                                  ),                                     
+                                  ),
                                 ),
                                 child: Container(
                                   clipBehavior: Clip.antiAlias,
@@ -153,7 +142,7 @@ class _VehicleSizeMenuState extends State<VehicleSizeMenu> {
                           },
                         ),
                         Text(
-                          optionList["title"]![activeIndex],
+                          VehicleModel.optionList[activeIndex].title,
                           textScaleFactor: 2.2,
                           style: Theme.of(context).textTheme.bodyText1,
                         ),
@@ -171,8 +160,8 @@ class _VehicleSizeMenuState extends State<VehicleSizeMenu> {
                               await Future.delayed(Duration(milliseconds: 200));
                               confirmed = false;
                               setState(() {});
-                              Navigator.pop(
-                                  context, optionList["title"]![activeIndex]);
+                              Navigator.pop(context,
+                                  VehicleModel.optionList[activeIndex].title);
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -183,17 +172,15 @@ class _VehicleSizeMenuState extends State<VehicleSizeMenu> {
                                     offset: Offset(1, confirmed ? 4 : 8),
                                     blurRadius: 8,
                                   ),
-                                  
                                 ],
-                                
-                               borderRadius: BorderRadius.circular(25),
+                                borderRadius: BorderRadius.circular(25),
                               ),
                               height: 45,
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 32.0, vertical: 8),
                                 child: Text(
-                                  "Confirm Car Type",
+                                  "Confirm ${VehicleModel.type} Type",
                                   style: Theme.of(context).textTheme.subtitle1,
                                 ),
                               ),

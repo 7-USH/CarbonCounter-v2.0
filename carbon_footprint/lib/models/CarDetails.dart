@@ -1,6 +1,7 @@
-// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, await_only_futures
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, await_only_futures, file_names
 
 import 'package:carbon_footprint/screens/menu/vehicle_fuel_menu.dart';
+import 'package:carbon_footprint/screens/menu/vehicle_model.dart';
 import 'package:carbon_footprint/screens/menu/vehicle_size_menu.dart';
 import 'package:carbon_footprint/screens/provider/data.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class _CarDetailsState extends State<CarDetails> {
   @override
   void initState() {
     super.initState();
-    carType = name == null ? "Vehicle Size" : name as String;
+    carType = name == null ? "Car type" : name as String;
     fuelType = name == null ? "Fuel Type" : name as String;
   }
 
@@ -38,6 +39,7 @@ class _CarDetailsState extends State<CarDetails> {
         InkWell(
           splashColor: Colors.grey,
           onTap: () async {
+            await VehicleModel.car();
             var type = Navigator.pushNamed(context, VehicleSizeMenu.id);
             var prevType = carType;
             carType = (await type).toString();
