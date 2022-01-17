@@ -3,6 +3,7 @@
 import 'package:carbon_footprint/models/Indicator.dart';
 import 'package:carbon_footprint/models/fieldCalc.dart';
 import 'package:carbon_footprint/screens/provider/data.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -40,17 +41,17 @@ class _JourneyCounterState extends State<JourneyCounter> {
     } else {
       vehicleType = "Unknown";
     }
-
     fuelType = Provider.of<DataPage>(context, listen: false).getfuelType();
     setState(() {});
   }
 
-  double CarbonEmission = 0;
+  double carbonEmission = 0;
 
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
     final size = MediaQuery.of(context).size;
+    String userCode = user.uid.toString();
 
     return Scaffold(
       body: StreamBuilder(
@@ -67,6 +68,9 @@ class _JourneyCounterState extends State<JourneyCounter> {
                   prevLocation!.longitude,
                   location!.latitude,
                   location.longitude);
+
+                  
+
               if (fuelType == "Petrol") {
                 var carType =
                     Provider.of<DataPage>(context, listen: false).getCarType();
@@ -81,6 +85,39 @@ class _JourneyCounterState extends State<JourneyCounter> {
                       CarbonCalculator.cal_car_petrol_mil(23.14, distance);
                 }
               }
+
+              if (fuelType == "Diesel") {
+                var carType =
+                    Provider.of<DataPage>(context, listen: false).getCarType();
+                if (carType == "Hatch back") {
+                  footprint =
+                      CarbonCalculator.cal_car_diesel_mileage(24.5, distance);
+                } else if (carType == "Sedan") {
+                  footprint =
+                      CarbonCalculator.cal_car_diesel_mileage(25.16, distance);
+                } else if (carType == "SUV") {
+                  footprint =
+                      CarbonCalculator.cal_car_diesel_mileage(23.14, distance);
+                }
+              }
+
+                 if (fuelType == "CNG") {
+                var carType =
+                    Provider.of<DataPage>(context, listen: false).getCarType();
+                if (carType == "Hatch back") {
+                  footprint =
+                      CarbonCalculator.cal_car_cng(24.5, distance);
+                } else if (carType == "Sedan") {
+                  footprint =
+                      CarbonCalculator.cal_car_cng(25.16, distance);
+                } else if (carType == "SUV") {
+                  footprint =
+                      CarbonCalculator.cal_car_cng(23.14, distance);
+                }
+              }
+
+
+
             }
             prevLocation = snapshot.data as Position?;
             return Stack(
@@ -193,8 +230,8 @@ class _JourneyCounterState extends State<JourneyCounter> {
                                           "https://cdn-icons-png.flaticon.com/512/1196/1196775.png"),
                                     ),
                                   ),
-                                  Text("Distance: " +
-                                      (distance / 1000).toStringAsFixed(2))
+                                  Text((distance / 1000).toStringAsFixed(2) +
+                                      " km")
                                 ],
                               ),
                               Column(
@@ -208,7 +245,8 @@ class _JourneyCounterState extends State<JourneyCounter> {
                                     ),
                                   ),
                                   Text(
-                                    "Footprint: " + footprint.toString(),
+                                    (footprint / 1000).toStringAsFixed(2) +
+                                        " kg",
                                   ),
                                 ],
                               ),
@@ -232,6 +270,7 @@ class _JourneyCounterState extends State<JourneyCounter> {
 
                               Navigator.pop(context);
                               // TODO: end journey phase
+                              addData(userCode);
                             },
                             child: Container(
                               width: 200,
@@ -269,5 +308,25 @@ class _JourneyCounterState extends State<JourneyCounter> {
         },
       ),
     );
+  }
+
+  addData(String userCode) async {
+    CollectionReference userData =
+        FirebaseFirestore.instance.collection("Users");
+
+    userData.snapshots().listen((snapshot) {});
+    var docSnapshot = await userData.doc(userCode).get();
+    var totalEmission = docSnapshot.get('totalEmission');
+    totalEmission += double.parse((footprint / 1000).toStringAsFixed(2));
+    carbonEmission = double.parse((footprint / 1000).toStringAsFixed(2));
+
+    Map<String, dynamic> demodata = {
+      "Distance": distance,
+      "Emission": carbonEmission,
+      "Type": vehicleType,
+      "totalEmission": totalEmission
+    };
+
+    userData.doc(userCode).set(demodata);
   }
 }

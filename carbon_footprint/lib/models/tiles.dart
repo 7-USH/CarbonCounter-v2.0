@@ -53,12 +53,12 @@ class Utils {
 
   static List<EmissionTiles> getEmissionTiles() {
     return [
-      EmissionTiles(color: Colors.red, icon: Icons.ac_unit, mode: "Car"),
-      EmissionTiles(color: Colors.yellow, icon: Icons.bus_alert, mode: "Bus"),
+      EmissionTiles(color: Colors.red, icon: const IconData(0xe902,fontFamily: '2sh'), mode: "Car"),
+      EmissionTiles(color: Colors.yellow, icon: const IconData(0xe901, fontFamily: '2sh'), mode: "Bus"),
       EmissionTiles(color: Colors.blue, icon: Icons.food_bank_outlined, mode: "Meals"),
-      EmissionTiles(color: Colors.orange, icon: Icons.place, mode: "Plane"),
-      EmissionTiles(color: Colors.green, icon: Icons.air, mode: "Auto"),
-      EmissionTiles(color: Colors.teal, icon: Icons.water, mode: "Water")
+      EmissionTiles(color: Colors.orange, icon: const IconData(0xe900, fontFamily: '2sh'), mode: "Plane"),
+      EmissionTiles(color: Colors.green, icon: const IconData(0xe904, fontFamily: '2sh'), mode: "Auto"),
+      EmissionTiles(color: Colors.teal, icon: const IconData(0xe903, fontFamily: '2sh'), mode: "Water")
     ];
   }
 }

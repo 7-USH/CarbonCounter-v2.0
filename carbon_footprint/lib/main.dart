@@ -1,6 +1,7 @@
 import 'package:carbon_footprint/constants/themes.dart';
 import 'package:carbon_footprint/models/Indicator.dart';
 import 'package:carbon_footprint/screens/LoadingScreen.dart';
+import 'package:carbon_footprint/screens/emission_screen.dart';
 import 'package:carbon_footprint/screens/home_screen.dart';
 import 'package:carbon_footprint/screens/journery.dart';
 import 'package:carbon_footprint/screens/login_screen.dart';
@@ -12,8 +13,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/menu/vehicle_fuel_menu.dart';
-
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,7 +39,7 @@ class MyApp extends StatelessWidget {
         theme: appTheme,
         initialRoute: LoadingScreen.id,
         routes: {
-          HomeScreen.id: (context) => const HomeScreen(),
+          HomeScreen.id: (context) => HomeScreen(),
           LoginPage.id: (context) => const LoginPage(),
           UserPage.id: (context) => const UserPage(),
           JourneyCounter.id: (context) => const JourneyCounter(),
@@ -50,6 +49,7 @@ class MyApp extends StatelessWidget {
           Indicator.id: (context) => Indicator(),
           VehicleSizeMenu.id: (context) => VehicleSizeMenu(),
           VehicleFuelMenu.id: (context) => VehicleFuelMenu(),
+          EmissionPage.id : (context) => EmissionPage(),
         },
       ),
     );
