@@ -6,7 +6,7 @@ import 'package:carbon_footprint/constants/themes.dart';
 import 'package:carbon_footprint/models/BusDetails.dart';
 import 'package:carbon_footprint/models/CarDetails.dart';
 import 'package:carbon_footprint/models/tiles.dart';
-import 'package:carbon_footprint/screens/journery.dart';
+import 'package:carbon_footprint/screens/journey.dart';
 import 'package:carbon_footprint/screens/login_screen.dart';
 import 'package:carbon_footprint/screens/provider/data.dart';
 import 'package:carbon_footprint/screens/provider/google_sign_in.dart';
