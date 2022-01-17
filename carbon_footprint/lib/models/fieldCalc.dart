@@ -18,7 +18,7 @@ class CarbonCalculator{
   }
 
   static double cal_car_cng(var cng_mileage, var dist) {
-    return (3.06 * cng_mileage / dist);
+    return ((3.06/0.636) * (dist / cng_mileage));
   }
 
   double cal_taxis(var dist) {
