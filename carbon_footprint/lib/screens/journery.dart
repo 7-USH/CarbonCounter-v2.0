@@ -230,8 +230,8 @@ class _JourneyCounterState extends State<JourneyCounter> {
                                           "https://cdn-icons-png.flaticon.com/512/1196/1196775.png"),
                                     ),
                                   ),
-                                  Text((distance / 1000).toStringAsFixed(2) +
-                                      " km")
+                                  Text( 
+                                      (distance / 1000).toStringAsFixed(2)+" km")
                                 ],
                               ),
                               Column(
@@ -245,8 +245,7 @@ class _JourneyCounterState extends State<JourneyCounter> {
                                     ),
                                   ),
                                   Text(
-                                    (footprint / 1000).toStringAsFixed(2) +
-                                        " kg",
+                                    (footprint/1000).toStringAsFixed(2)+" kg",
                                   ),
                                 ],
                               ),
