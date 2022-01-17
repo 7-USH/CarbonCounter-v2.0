@@ -69,6 +69,8 @@ class _JourneyCounterState extends State<JourneyCounter> {
                   location!.latitude,
                   location.longitude);
 
+                  
+
               if (fuelType == "Petrol") {
                 var carType =
                     Provider.of<DataPage>(context, listen: false).getCarType();
@@ -83,6 +85,39 @@ class _JourneyCounterState extends State<JourneyCounter> {
                       CarbonCalculator.cal_car_petrol_mil(23.14, distance);
                 }
               }
+
+              if (fuelType == "Diesel") {
+                var carType =
+                    Provider.of<DataPage>(context, listen: false).getCarType();
+                if (carType == "Hatch back") {
+                  footprint =
+                      CarbonCalculator.cal_car_diesel_mileage(24.5, distance);
+                } else if (carType == "Sedan") {
+                  footprint =
+                      CarbonCalculator.cal_car_diesel_mileage(25.16, distance);
+                } else if (carType == "SUV") {
+                  footprint =
+                      CarbonCalculator.cal_car_diesel_mileage(23.14, distance);
+                }
+              }
+
+                 if (fuelType == "CNG") {
+                var carType =
+                    Provider.of<DataPage>(context, listen: false).getCarType();
+                if (carType == "Hatch back") {
+                  footprint =
+                      CarbonCalculator.cal_car_cng(24.5, distance);
+                } else if (carType == "Sedan") {
+                  footprint =
+                      CarbonCalculator.cal_car_cng(25.16, distance);
+                } else if (carType == "SUV") {
+                  footprint =
+                      CarbonCalculator.cal_car_cng(23.14, distance);
+                }
+              }
+
+
+
             }
             prevLocation = snapshot.data as Position?;
             return Stack(

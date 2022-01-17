@@ -161,12 +161,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     CircularChart(
                       // TODO: here enter the Calculated Number
                       // and percentage of Co2 Emission as of today
-                      calculationNumber: totalEmission,
+                      calculationNumber: (totalEmission),
                       width: size.width / 3,
                       height: size.height / 3,
                       painter: ProgressPainter(
                           circleWidth: size.width / 17,
-                          completedPercentage: totalEmission,
+                          completedPercentage: (totalEmission / 1000) * 360,
                           defaultCircleColor: kSecondaryColor.withOpacity(1),
                           percentageCompletedCircleColor: kPrimeColor),
                     ),
@@ -229,7 +229,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     userData.snapshots().listen((snapshot) {});
     var docSnapshot = await userData.doc(userCode).get();
-    totalEmission = double.parse(docSnapshot.get("Emission").toString());
+    totalEmission = double.parse(docSnapshot.get("totalEmission").toString());
     setState(() {});
   }
 }
